@@ -3,56 +3,31 @@
 The NixOS integration test driver is a framework for orchestrating networks of virtual machines for testing purposes.
 The [nixpkgs](https://github.com/nixos/nixpkgs) project, the biggest open source package collection in the world, uses it with [more than a thousand tests](https://github.com/NixOS/nixpkgs/tree/master/nixos/tests) to check packages and NixOS services.
 
-## Original Manual
+## Official Documentation
 
-As the NixOS test driver belongs to the nixpkgs repository, it is also documented there in the [NixOS manual](https://nixos.org/nixos/manual), section [NixOS Tests](https://nixos.org/manual/nixos/stable/#sec-nixos-tests)
+The NixOS test driver belongs to the `nixpkgs` repository and is documented in the [NixOS manual](https://nixos.org/manual/nixos/stable/#sec-nixos-tests).
 
-The official manual is complete and serves as a reference guide. This manual, on the other hand, is opinionated and more hands-on, designed to help beginners get started quickly.
+The official manual is a complete reference guide. This manual, on the other hand, is opinionated and more hands-on, designed to help beginners get started quickly.
 
-## Features
+## Getting Started
 
-<div class="grid cards" markdown>
+- [**Setup**](./setup.md): Prerequisites and your first test.
+- [**Tutorials**](./tutorials/minimal.md): Practical, step-by-step guides.
+- [**Features**](./features/index.md): Deep dives into the driver's capabilities.
 
--   :material-server-network:{ .lg .middle } __Describe and run networks of computers__
+## Tutorials
 
-    ---
+- [**A minimal NixOS test**](./tutorials/minimal.md)
+- [**Connecting to Nodes in Interactive Mode**](./tutorials/connecting-to-nodes-in-interactive.md)
+- [**Multi-node and Multi-network Tests**](./tutorials/multi-network-tests.md)
+- [**Bundling Tests with a Package**](./tutorials/test-in-extra-package.md)
 
-    Deploy to local or remote NixOS systems, even from macOS, with automatic remote building support.
+## Resources
 
-    [:octicons-arrow-right-24: command reference](commands/index.md)
-
--   :material-shield-lock:{ .lg .middle } __Safety First__
-
-    ---
-
-    Prevent SSH lockouts, broken sudo permissions, and configuration errors before they
-    happen with comprehensive pre-deployment checks for SSH access, sudo/wheel permissions,
-    boot loader/disk space, service configs, and security settings.
-
-    [:octicons-arrow-right-24: Security Checks](checks/index.md)
-
--   :material-monitor-dashboard:{ .lg .middle } __System Health__
-
-    ---
-
-    Monitor updates, service status, and reboot requirements across all your systems.
-
-    [:octicons-arrow-right-24: Monitoring](commands/status.md)
-
--   :material-cog:{ .lg .middle } __Zero Configuration__
-
-    ---
-
-    Works with vanilla NixOS configurations - no special code or extra files needed.
-    Automatically handles all the complexities that `nixos-rebuild` requires manual
-    configuration for.
-
--   :material-eye:{ .lg .middle } __Fancy Optics__
-
-    ---
-
-    Enjoy a polished user experience with real-time build progress and output
-    thanks to [`nix-output-monitor`](https://github.com/maralorn/nix-output-monitor)
-    integration (when available).
-
-</div>
+- [Introduction to NixOS Integration Tests](https://nixcademy.com/posts/nixos-integration-tests/)
+- [Deep Dive into Architecture](https://nixcademy.com/posts/nixos-integration-tests-part-2/)
+- [Running Tests on macOS](https://nixcademy.com/posts/running-nixos-integration-tests-on-macos/)
+- [GitHub Actions Integration](https://nixcademy.com/posts/nixos-integration-test-on-github/)
+- [Faster Container-based Tests](https://nixcademy.com/posts/faster-cheaper-nixos-integration-tests-with-containers/)
+- [NixCon Demo Repository](https://github.com/applicative-systems/nixos-test-driver-nixcon)
+- [GPU Acceleration in Tests](https://github.com/applicative-systems/nixos-gpu-tests)
