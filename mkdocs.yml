@@ -4,7 +4,6 @@ site_author: Jacek Galowicz
 site_description: >-
   Inofficial NixOS Test Driver Manual with hands-on character and many examples and tutorials. Learn how to unlock the full potential here.
 copyright: Copyright &copy; 2026 <a href="https://applicative.systems">Applicative Systems Group</a>
-
 repo_url: https://github.com/applicative-systems/nixos-test-driver-manual
 repo_name: applicative-systems/nixos-test-driver-manual
 edit_uri: edit/main/documentation/docs
@@ -108,7 +107,8 @@ markdown_extensions:
       line_spans: __span
       pygments_lang_class: true
   - pymdownx.inlinehilite
-  - pymdownx.snippets
+  - pymdownx.snippets:
+      base_path: .
   - pymdownx.superfences
   - pymdownx.inlinehilite
   - pymdownx.keys
@@ -138,18 +138,18 @@ extra:
 nav:
   - Home: index.md
   - Getting started:
-    - Setup: setup.md
-    - Minimal Test: tutorials/minimal.md
+      - Setup: setup.md
+      - Minimal Test: tutorials/minimal.md
   - Features:
-    - features/index.md
-    - VMs: features/vm.md
-    - Containers: features/container.md
-    - Interactive Mode: features/interactive.md
-    - Screenshots and OCR: features/screenshots-and-ocr.md
-    - Linting: features/linting.md
-    - Error Hook: features/error-hook.md
+      - features/index.md
+      - VMs: features/vm.md
+      - Containers: features/container.md
+      - Interactive Mode: features/interactive.md
+      - Screenshots and OCR: features/screenshots-and-ocr.md
+      - Linting: features/linting.md
+      - Error Hook: features/error-hook.md
   - Tutorials:
-    - tutorials/test-in-extra-package.md
-    - tutorials/connecting-to-nodes-in-interactive.md
-    - tutorials/multi-network-tests.md
-    - tutorials/graphical-vm-tests.md
+      - tutorials/test-in-extra-package.md
+      - tutorials/connecting-to-nodes-in-interactive.md
+      - tutorials/multi-network-tests.md
+      - tutorials/graphical-vm-tests.md

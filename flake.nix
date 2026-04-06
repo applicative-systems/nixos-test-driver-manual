@@ -7,8 +7,7 @@
 
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    #mkdocs-flake.url = "github:applicative-systems/mkdocs-flake";
-    mkdocs-flake.url = "/Users/tfc/src/asg/mkdocs-flake";
+    mkdocs-flake.url = "github:applicative-systems/mkdocs-flake/click";
 
     treefmt-nix.url = "github:numtide/treefmt-nix";
     treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
@@ -40,9 +39,13 @@
           };
         in
         {
-          documentation.mkdocs-root = ./docs;
+          documentation.mkdocs-root = ./.;
 
           formatter = treefmtEval.config.build.wrapper;
+
+          packages = {
+            test-minimal = pkgs.testers.runNixOSTest ./examples/minimal.nix;
+          };
 
           devShells.default = pkgs.mkShell {
             packages = [

@@ -43,7 +43,7 @@ In your `flake.nix`, you can expose the test as a check.
 ```nix title="flake.nix"
 {
   outputs = { self, nixpkgs }: {
-    packages.x86_64-linux.default = (import ./package.nix { 
+    packages.x86_64-linux.default = (import ./package.nix {
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
       inherit nixpkgs;
     }).echo-server;

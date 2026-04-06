@@ -70,14 +70,18 @@
         "uv2nix": "uv2nix"
       },
       "locked": {
-        "lastModified": 1775489014,
-        "narHash": "sha256-ZarhSNjaye/2N/L+qgGuMtQtNiAzIyuAEgE8+lt+biM=",
-        "path": "/Users/tfc/src/asg/mkdocs-flake",
-        "type": "path"
+        "lastModified": 1775489012,
+        "narHash": "sha256-86iJesrt9aG5eY8NGjGcIndotF7CuGLa9y1MI/ltsTo=",
+        "owner": "applicative-systems",
+        "repo": "mkdocs-flake",
+        "rev": "15561609a1754190554507f2c76f4c8220c5cb3d",
+        "type": "github"
       },
       "original": {
-        "path": "/Users/tfc/src/asg/mkdocs-flake",
-        "type": "path"
+        "owner": "applicative-systems",
+        "ref": "click",
+        "repo": "mkdocs-flake",
+        "type": "github"
       }
     },
     "nix-github-actions": {

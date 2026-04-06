@@ -20,7 +20,7 @@ You can enable container-based tests by setting `useContainers = true;` in your 
 ```nix title="container-test.nix"
 {
   name = "container-test";
-  
+
   # Enable container-based testing
   useContainers = true;
 

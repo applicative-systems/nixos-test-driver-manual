@@ -16,10 +16,10 @@ By default, nodes in a test can communicate with each other using their hostname
   testScript = ''
     machine1.wait_for_unit("network-online.target")
     machine2.wait_for_unit("network-online.target")
-    
+
     # Ping machine2 from machine1
     machine1.succeed("ping -c 1 machine2")
-    
+
     # Ping machine1 from machine2
     machine2.succeed("ping -c 1 machine1")
   '';
