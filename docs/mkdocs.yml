@@ -1,0 +1,155 @@
+site_name: NixOS Test Driver Manual
+site_url: https://applicative.systems/nixos-test-driver
+site_author: Jacek Galowicz
+site_description: >-
+  Inofficial NixOS Test Driver Manual with hands-on character and many examples and tutorials. Learn how to unlock the full potential here.
+copyright: Copyright &copy; 2026 <a href="https://applicative.systems">Applicative Systems Group</a>
+
+repo_url: https://github.com/applicative-systems/nixos-test-driver-manual
+repo_name: applicative-systems/nixos-test-driver-manual
+edit_uri: edit/main/documentation/docs
+
+plugins:
+  - glightbox
+  - offline
+  - search
+  - tags
+
+theme:
+  font:
+    text: Raleway
+  language: en
+  name: material
+
+  logo: assets/applicative-systems-rounded-white.svg
+  icon:
+    logo: logo
+    repo: fontawesome/brands/github
+
+  features:
+    - announce.dismiss
+    - content.action.edit
+    - content.action.view
+    - content.code.annotate
+    - content.code.copy
+    - content.code.select
+    - content.tabs.link
+    - content.tooltips
+    - header.autohide
+    - navigation.expand
+    - navigation.footer
+    - navigation.indexes
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.instant.progress
+    - navigation.prune
+    - navigation.sections
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.top
+    - navigation.tracking
+    - search.highlight
+    - search.share
+    - search.suggest
+    - toc.follow
+    - toc.integrate
+
+  palette:
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      primary: blue grey
+      accent: grey
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      primary: blue grey
+      accent: grey
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      primary: grey
+      accent: blue
+      scheme: slate
+      toggle:
+        icon: material/weather-night
+        name: Switch to system preference
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - plantuml_markdown
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.critic
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tilde
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+  - toc:
+      permalink: true
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/applicative-systems
+    - icon: fontawesome/brands/x-twitter
+      link: https://x.com/ApplicativeSys
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/company/applicative-systems
+
+nav:
+  - Home: index.md
+  - Getting started:
+    - Setup: setup.md
+    - Minimal Test: tutorials/minimal.md
+  - Features:
+    - features/index.md
+    - VMs: features/vm.md
+    - Containers: features/container.md
+    - Interactive Mode: features/interactive.md
+    - Screenshots and OCR: features/screenshots-and-ocr.md
+    - Linting: features/linting.md
+    - Error Hook: features/error-hook.md
+  - Tutorials:
+    - tutorials/test-in-extra-package.md
+    - tutorials/connecting-to-nodes-in-interactive.md
+    - tutorials/multi-network-tests.md
+    - tutorials/graphical-vm-tests.md
