@@ -1,14 +1,61 @@
 # A minimal NixOS test
 
-The NixOS test driver makes it easy to define a minimal test that boots a machine and runs a command.
+Let's define a minimal test that boots a machine and runs a command.
 
-## Defining the test file
+There is a bit of explanation in tooltips scattered over the code examples, but the primary goal of this page is to help you get a test running and then pick up in the other pages.
 
-Create a file named `test.nix`:
+!!! Prerequisites
 
-```nix title="test.nix"
+    Please make sure you have Nix and KVM set up correctly to run this test.
+    If unsure, consult the [Setup](../setup.md) guide first.
+
+    You can also just run this test and see if it "just works".
+    If the tests runs longer than ~30 seconds or you get error messages, these are signs of a malformed setup.
+
+## Defining the test
+
+Create a file named `minimal.nix`.
+
+It configures a virtual machine that comes with [GNU Hello](https://www.gnu.org/software/hello/) preinstalled.
+The test itself boots the machine and then runs `hello` on the terminal and tests if the output contains "Hello, world!":
+
+```nix title="minimal.nix"
 --8<-- "examples/minimal.nix"
 ```
+
+<!-- prettier-ignore-start -->
+
+1.  **Test name** (mandatory)
+
+    Every test needs a name.
+    It also becomes part of the output path later.
+
+2.  **Top-level attribute set `nodes`**
+
+    This is the _declarative_ part of the test that defines the existing infrastructure.
+
+    For every key-value entry here, the test driver will later create a VM, a Python variable, and a DNS entry.
+    The key is used to name the VM, the value represents the NixOS configuration of the VM.
+
+    For an entry like `my-machine`, the test driver creates the following:
+
+    - VM with the host name `my-machine`
+    - Python variable `my-machine` for use in the test script
+    - DNS setup so you can reach `my-machine` via network from other machines.
+
+3.  **NixOS configuration**
+
+    Every node name gets assigned a full NixOS configuration.
+    The normal NixOS configuration rules apply.
+    You can use `imports = [ ./some/module.nix  ];` and everything else that's allowed in normal NixOS configurations.
+
+    Setting this to an empty configuration (`{}`) creates a VM with default settings, network support, and a password-less `root` user account.
+
+4.  **Test script**
+
+    This is the _imperative_ part of the test that describes the steps and stimulation that the infrastructure shall go to and conform with.
+
+<!-- prettier-ignore-end -->
 
 ## Running the test
 
@@ -21,45 +68,47 @@ nix-build -E "(import <nixpkgs> {}).testers.runNixOSTest ./minimal.nix"
 `runNixOSTest` returns a derivation that runs the test in the sandbox and returns its result in the output folder (typically linked to by the `result/` symlink).
 For most tests, this folder is empty.
 
-### Flake boilerplate code
+### Boiler plate code
 
-If you intend to make the test part of a flake, the minimal boiler plate code would look like this:
+If you intend to make the test part of a project, the minimal boiler plate code would look like this:
 
-```nix title="flake.nix"
-{
-  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+=== "Flakes"
 
-  outputs =
-    inputs:
-    let
-      system = "x86_64-linux";
-      pkgs = inputs.nixpkgs.legacyPackages.${system};
-    in
+    ```nix title="flake.nix"
     {
-      packages.${system}.test = pkgs.testers.runNixOSTest ./minimal.nix;
-    };
-}
-```
+      inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
+      outputs =
+        inputs:
+        let
+          system = "x86_64-linux";
+          pkgs = inputs.nixpkgs.legacyPackages.${system};
+        in
+        {
+          packages.${system}.test = pkgs.testers.runNixOSTest ./minimal.nix;
+        };
+    }
+    ```
+
+=== "Non-Flakes"
+
+    ```nix title="run-test.nix"
+    let
+      pkgs = import <nixpkgs> { };
+    in
+    pkgs.testers.runNixOSTest ./minimal.nix
+    ```
 
 Run the test:
 
-```console
-nix build -L .#test
-```
+=== "Flakes"
 
-### Without flakes
+    ```console
+    nix build -L .#test
+    ```
 
-Without flakes, the minimal code in a `release.nix` file or similar would look like this:
+=== "Non-Flakes"
 
-```nix title="run-test.nix"
-let
-  pkgs = import <nixpkgs> { };
-in
-pkgs.testers.runNixOSTest ./minimal.nix
-```
-
-Run the test:
-
-```console
-nix-build run-test.nix
-```
+    ```console
+    nix-build run-test.nix
+    ```

@@ -53,6 +53,9 @@ $ nix --experimental-features "nix-command flakes" run nixpkgs#hello
 Hello, world!
 ```
 
+If this works, you are ready to go:
+Continue [writing your first minimal NixOS test here](tutorials/minimal.md)
+
 ## macOS setup
 
 NixOS integration tests can run on macOS (Apple Silicon) by using a Linux builder or the `apple-virt` virtualization framework.

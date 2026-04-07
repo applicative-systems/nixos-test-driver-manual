@@ -144,12 +144,19 @@ nav:
       - features/index.md
       - VMs: features/vm.md
       - Containers: features/container.md
+      - Defaults: features/defaults.md
       - Interactive Mode: features/interactive.md
       - Screenshots and OCR: features/screenshots-and-ocr.md
       - Linting: features/linting.md
       - Error Hook: features/error-hook.md
+      - Module Composition: features/module-composition.md
   - Tutorials:
       - tutorials/test-in-extra-package.md
       - tutorials/connecting-to-nodes-in-interactive.md
       - tutorials/multi-network-tests.md
       - tutorials/graphical-vm-tests.md
+      - tutorials/applying-overlays.md
+  - Best Practises:
+      - best-practises/timeout.md
+      - best-practises/service-race-conditions.md
+      - best-practises/pkgs-attribute.md

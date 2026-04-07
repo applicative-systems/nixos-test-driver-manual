@@ -1,9 +1,10 @@
 {
-  name = "Minimal hello test";
+  name = "Minimal hello test"; # (1)
 
   nodes = {
+    # (2)
     vm =
-      { pkgs, ... }:
+      { pkgs, ... }: # (3)
       {
         environment.systemPackages = [
           pkgs.hello
@@ -11,6 +12,7 @@
       };
   };
 
+  # (4)
   testScript = ''
     start_all()
 
