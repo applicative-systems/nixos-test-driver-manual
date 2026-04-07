@@ -6,6 +6,14 @@ NixOS integration tests excel at orchestrating complex network setups with multi
 
 By default, nodes in a test can communicate with each other using their hostnames.
 
+!!! example "Run this example test yourself"
+
+    To run this test directly from the example repository, run:
+
+    ```console
+    nix build -L github:applicative-systems/nixos-test-driver-manual#test-ping
+    ```
+
 ```nix title="ping.nix"
 --8<-- "examples/ping.nix"
 ```
@@ -13,6 +21,14 @@ By default, nodes in a test can communicate with each other using their hostname
 ## Using Multiple Networks (VLANs)
 
 You can isolate nodes into different networks by using the `virtualisation.vlans` option (see also [official docs](https://nixos.org/manual/nixos/stable/#sec-nixos-test-nodes)).
+
+!!! example "Run this example test yourself"
+
+    To run this test directly from the example repository, run:
+
+    ```console
+    nix build -L github:applicative-systems/nixos-test-driver-manual#test-multi-network
+    ```
 
 ```nix title="multi-network.nix"
 --8<-- "examples/multi-network.nix"
