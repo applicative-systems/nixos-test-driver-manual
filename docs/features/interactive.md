@@ -3,7 +3,7 @@
 One of the most powerful features of the NixOS test driver is the **interactive mode**.
 It allows us to run and debug your tests step-by-step and play around in each VM interactively.
 
-The most important use case for this are:
+The most important use cases are:
 
 <!-- prettier-ignore-start -->
 
