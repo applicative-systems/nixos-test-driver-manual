@@ -46,6 +46,7 @@
           packages = {
             test-minimal = pkgs.testers.runNixOSTest ./examples/minimal.nix;
             test-ping = pkgs.testers.runNixOSTest ./examples/ping.nix;
+            test-multi-network = pkgs.testers.runNixOSTest ./examples/multi-network.nix;
             test-echo = pkgs.testers.runNixOSTest ./examples/echo;
             test-browser = pkgs.testers.runNixOSTest ./examples/browser.nix;
           };

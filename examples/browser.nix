@@ -1,7 +1,4 @@
-{ pkgs, lib, ... }:
-let
-  nixpkgs = pkgs.path;
-in
+{ lib, ... }:
 {
   name = "nixcon-browser-test";
   globalTimeout = 500;
@@ -24,7 +21,9 @@ in
     client =
       { pkgs, ... }:
       {
-        imports = [ (nixpkgs + "/nixos/tests/common/x11.nix") ];
+        imports = [
+          (pkgs.path + "/nixos/tests/common/x11.nix")
+        ];
 
         programs.firefox.enable = true;
 
