@@ -37,10 +37,10 @@ in
   testScript = ''
     start_all()
 
-    client.systemctl("start network-online.target")
     server.systemctl("start network-online.target")
-    client.wait_for_unit("network-online.target")
+    client.systemctl("start network-online.target")
     server.wait_for_unit("network-online.target")
+    client.wait_for_unit("network-online.target")
 
     server.succeed("ping -c 1 client")
     client.succeed("ping -c 1 server")

@@ -12,6 +12,14 @@ There is a bit of explanation in tooltips scattered over the code examples, but 
     You can also just run this test and see if it "just works".
     If the tests runs longer than ~30 seconds or you get error messages, these are signs of a malformed setup.
 
+!!! example "Run this example test yourself"
+
+    To run this test directly from the example repository, run:
+
+    ```console
+    nix build -L github:applicative-systems/nixos-test-driver-manual#test-minimal
+    ```
+
 ## Defining the test
 
 Create a file named `minimal.nix`.
