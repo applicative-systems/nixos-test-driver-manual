@@ -1,5 +1,7 @@
 # NixOS Test Driver Manual
 
+![bla](./assets/nixos-integration-test-driver-kit.jpg){ align=right width="300" }
+
 The NixOS integration test driver is a framework for orchestrating networks of virtual machines for testing purposes.
 The [nixpkgs](https://github.com/nixos/nixpkgs) project, the biggest open source package collection in the world, uses it with [more than a thousand tests](https://github.com/NixOS/nixpkgs/tree/master/nixos/tests) to check packages and NixOS services.
 

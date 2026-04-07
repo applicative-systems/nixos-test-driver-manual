@@ -19,6 +19,7 @@ They use [QEMU](https://www.qemu.org/) to spin up one or more virtual machines r
 -   Disadvantages
 
     - **Overhead**: Each VM consumes more resources (time and memory) because it simulates a whole system
+    - **Virtualisation requirement**: Compared to [container-based](./container.md) tests, the Nix build host either needs to provide KVM support or the nodes will be very slow due to software virtualisation.
 
 </div>
 
@@ -61,7 +62,8 @@ For all the details, refer to the [NixOS test module that assembles test node co
 QEMU VM nodes also import the [`qemu-vm.nix`](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/virtualisation/qemu-vm.nix) profile.
 The prefix `virtualisation.*` provides access to options like CPU core count, memory size, QEMU package choice, etc.
 
-For all the options, refer to the [NixOS options search](https://search.nixos.org/options?channel=unstable&query=virtualisation.).
+For all the options, refer to the [profile definition](https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/virtualisation/qemu-vm.nix) or [NixOS options search](https://search.nixos.org/options?channel=unstable&query=virtualisation.).
+There is also more information in the [official NixOS manual](https://nixos.org/manual/nixos/stable/#sec-nixos-test-nodes).
 
 This example reconfigures a VM:
 
