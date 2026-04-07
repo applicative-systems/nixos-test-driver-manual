@@ -45,6 +45,9 @@
 
           packages = {
             test-minimal = pkgs.testers.runNixOSTest ./examples/minimal.nix;
+            test-ping = pkgs.testers.runNixOSTest ./examples/ping.nix;
+            test-echo = pkgs.testers.runNixOSTest ./examples/echo;
+            test-browser = pkgs.testers.runNixOSTest ./examples/browser.nix;
           };
 
           devShells.default = pkgs.mkShell {
