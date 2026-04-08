@@ -1,7 +1,3 @@
-{ pkgs, ... }:
-let
-  nixpkgs = pkgs.path;
-in
 {
   name = "Browser test";
   globalTimeout = 500;
@@ -14,10 +10,10 @@ in
       networking.firewall.allowedTCPPorts = [ 80 ];
     };
     client =
-      { pkgs, ... }:
+      { pkgs, modulesPath, ... }:
       {
         imports = [
-          (nixpkgs + "/nixos/tests/common/x11.nix") # (2)
+          (modulesPath + "/../tests/common/x11.nix") # (2)
         ];
 
         programs.firefox.enable = true;

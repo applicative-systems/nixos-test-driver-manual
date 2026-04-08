@@ -127,9 +127,9 @@ Run the test:
 
 <div class="grid cards" markdown>
 
-- [:playground_slide: **Tutorials**](./tutorials/minimal.md): Discover more complex tests with networking, graphics, etc.
-- [:map: **Features**](./features/index.md): Deep dives into the driver's capabilities like VMs and containers, the interactive mode, graphics, OCR, test linting.
-- [:tools: **Best practises**](./best-practises/index.md): Do's and dont's from experience.
+- [:playground_slide: **Tutorials**](../tutorials/): Discover more complex tests with networking, graphics, etc.
+- [:map: **Features**](../features/): Deep dives into the driver's capabilities like VMs and containers, the interactive mode, graphics, OCR, test linting.
+- [:tools: **Best practises**](../best-practises/): Do's and dont's from experience.
 
 </div>
 

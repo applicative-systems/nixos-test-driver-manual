@@ -40,3 +40,6 @@ If you are interested in setting up routing in your tests, please have a look at
 
 - [`bittorrent.nix` test](https://github.com/NixOS/nixpkgs/blob/master/nixos/tests/bittorrent.nix)
 - [`networking/router.nix` test](https://github.com/NixOS/nixpkgs/blob/master/nixos/tests/networking/router.nix)
+
+![](../assets/bittorrent-test.png){ width=500 }
+![](../assets/integration-test-driver-architecture.png){ width=500 }

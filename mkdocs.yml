@@ -158,6 +158,7 @@ nav:
       - tutorials/applying-overlays.md
       - tutorials/cuda-tests.md
   - Best Practises:
+      - best-practises/index.md
       - best-practises/timeout.md
       - best-practises/service-race-conditions.md
       - best-practises/pkgs-attribute.md
