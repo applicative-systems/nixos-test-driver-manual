@@ -83,13 +83,13 @@ Similar to the [`defaults` top-level attribute](../features/module-composition.m
 {
   name = "some test";
 
-  nodes = {
+  nodes = { # (1)
     machine1 = { };
     machine2 = { };
   };
 
-  interactive = {
-    defaults = { pkgs, ... }: {
+  interactive = { # (2)
+    defaults = { pkgs, ... }: { # (3)
       environment.systemPackages = [
         pkgs.wireshark
       ];
@@ -105,6 +105,15 @@ Similar to the [`defaults` top-level attribute](../features/module-composition.m
   '';
 }
 ```
+
+1.  All configuration in the `nodes` attribute will be used in all tests, sandboxed and interactive.
+
+2.  All configuration in `interactive` will be mixed with the `nodes` (and `containers` if used) configuration, but only in interactive mode.
+
+    Outside interactive mode, it is as if these lines did not exist.
+
+3.  `defaults` can be combined with `interactive` just fine!
+
 
 Package [`wireshark`](https://www.wireshark.org/) for network packet analysis is added to all nodes and only on `machine2`, the firewall is disabled.
 
