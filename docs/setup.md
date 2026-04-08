@@ -85,8 +85,6 @@ Check your KVM configuration:
    ```
    In this configuration, anyone has write-access to `/dev/kvm`, which is the simplest configuration method.
 
-
-
 ## :fontawesome-solid-apple-alt: macOS setup
 
 NixOS integration tests can run on macOS (Apple Silicon) by using a Linux builder or the `apple-virt` virtualization framework.

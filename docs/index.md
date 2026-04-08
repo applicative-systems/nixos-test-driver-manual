@@ -26,7 +26,6 @@ The official manual is a complete reference guide. This manual, on the other han
 
 <!-- prettier-ignore-end -->
 
-
 ## Further resources
 
 <!-- prettier-ignore-start -->

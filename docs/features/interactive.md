@@ -114,7 +114,6 @@ Similar to the [`defaults` top-level attribute](../features/module-composition.m
 
 3.  `defaults` can be combined with `interactive` just fine!
 
-
 Package [`wireshark`](https://www.wireshark.org/) for network packet analysis is added to all nodes and only on `machine2`, the firewall is disabled.
 
 If these settings are often needed for debugging, but never desired in non-interactive production tests, this is the perfect way to set it up.
