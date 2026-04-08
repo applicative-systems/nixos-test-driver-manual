@@ -142,14 +142,15 @@ nav:
       - Minimal Test: tutorials/minimal.md
   - Features:
       - features/index.md
-      - VMs: features/vm.md
-      - Containers: features/container.md
-      - Interactive Mode: features/interactive.md
-      - Screenshots and OCR: features/screenshots-and-ocr.md
-      - Linting: features/linting.md
-      - Error Hook: features/error-hook.md
+      - features/vm.md
+      - features/container.md
+      - features/interactive.md
       - features/module-composition.md
+      - features/screenshots-and-ocr.md
+      - features/linting.md
+      - features/error-hook.md
   - Tutorials:
+      - tutorials/index.md
       - tutorials/test-in-extra-package.md
       - tutorials/connecting-to-nodes-in-interactive.md
       - tutorials/multi-network-tests.md

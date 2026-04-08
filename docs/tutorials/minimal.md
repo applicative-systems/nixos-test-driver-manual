@@ -10,7 +10,7 @@ There is a bit of explanation in tooltips scattered over the code examples, but 
     If unsure, consult the [Setup](../setup.md) guide first.
 
     You can also just run this test and see if it "just works".
-    If the tests runs longer than ~30 seconds or you get error messages, these are signs of a malformed setup.
+    If the tests runs longer than ~30 seconds or you get error messages, these are signs of misconfiguration.
 
 !!! example "Run this example test yourself"
 
@@ -120,3 +120,17 @@ Run the test:
     ```console
     nix-build run-test.nix
     ```
+
+## Great, it works. Where to from here?
+
+<!-- prettier-ignore-start -->
+
+<div class="grid cards" markdown>
+
+- [:playground_slide: **Tutorials**](./tutorials/minimal.md): Discover more complex tests with networking, graphics, etc.
+- [:map: **Features**](./features/index.md): Deep dives into the driver's capabilities like VMs and containers, the interactive mode, graphics, OCR, test linting.
+- [:tools: **Best practises**](./best-practises/index.md): Do's and dont's from experience.
+
+</div>
+
+<!-- prettier-ignore-end -->

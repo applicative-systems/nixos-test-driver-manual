@@ -2,20 +2,68 @@
 
 To run NixOS integration tests, you basically just need Nix and, for the best experience, KVM support.
 
-If you wish to run NixOS integration tests on Apple macOS, please go to the [macOS section](#macos-setup).
+<!-- prettier-ignore-start -->
 
-## Prerequisites
+<div class="grid cards" markdown>
 
-### Baremetal GNU/Linux
+-   :simple-linux: **Linux**
 
-Any GNU/Linux distribution works with Nix and the integration tests.
+    ---
 
-The test driver can run virtual machines (using [qemu](https://www.qemu.org/)) and containers (using [systemd-nspawn](https://www.freedesktop.org/software/systemd/man/latest/systemd-nspawn.html)).
+    The test driver can run virtual machines ([qemu](https://www.qemu.org/)) and containers ([systemd-nspawn](https://www.freedesktop.org/software/systemd/man/latest/systemd-nspawn.html)).
+    For good VM performance, run a *bare-metal* instance of Linux.
 
-The virtual machines don't always run well if Nix itself already runs inside a virtualized Linux machine.
-For the best experience with VMs, use a baremetal Linux machine (The container based tests run well inside VMs).
+-   :fontawesome-solid-apple-alt: **macOS**
 
-### Linux KVM
+    ---
+
+    The test driver also runs on macOS.
+    Only VMs are supported, not containers.
+
+    [:octicons-arrow-right-16: See macOS setup](#macos-setup)
+
+-   :simple-nixos: **Nix**
+
+    ---
+
+    Use the multi-user installation for best experience.
+
+    [:octicons-arrow-right-16: See Nix install & check](#nix)
+
+-   :octicons-stack-16: **KVM**
+
+    ---
+
+    Hardware-accelerated virtualisation makes VM tests fast.
+
+    [:octicons-arrow-right-16: See KVM check](#nix)
+
+</div>
+
+<!-- prettier-ignore-end -->
+
+## Installation and setup check
+
+### :simple-nixos: Nix
+
+The tests are all built and run with Nix.
+To install Nix, run the following command (see also [Nix installer page](https://nixos.org/download/)):
+
+```console
+sh <(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install) --daemon
+```
+
+Test your Nix installation like this:
+
+```console
+$ nix --experimental-features "nix-command flakes" run nixpkgs#hello
+Hello, world!
+```
+
+If this works, you are ready to go:
+Continue [writing your first minimal NixOS test here](tutorials/minimal.md)
+
+### :octicons-stack-16: Linux KVM
 
 The important bit is that [KVM](https://en.wikipedia.org/wiki/Kernel-based_Virtual_Machine) is enabled, which enables hardware-accelerated virtualization.
 The tests also run without KVM but will be very slow in that case.
@@ -37,26 +85,9 @@ Check your KVM configuration:
    ```
    In this configuration, anyone has write-access to `/dev/kvm`, which is the simplest configuration method.
 
-### Nix
 
-The tests are all built and run with Nix.
-To install Nix, run the following command (see also [Nix installer page](https://nixos.org/download/)):
 
-```console
-sh <(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install) --daemon
-```
-
-Test your Nix installation like this:
-
-```console
-$ nix --experimental-features "nix-command flakes" run nixpkgs#hello
-Hello, world!
-```
-
-If this works, you are ready to go:
-Continue [writing your first minimal NixOS test here](tutorials/minimal.md)
-
-## macOS setup
+## :fontawesome-solid-apple-alt: macOS setup
 
 NixOS integration tests can run on macOS (Apple Silicon) by using a Linux builder or the `apple-virt` virtualization framework.
 For more details, see the [Nixcademy NixOS test driver guide for macOS](https://nixcademy.com/posts/running-nixos-integration-tests-on-macos/).
