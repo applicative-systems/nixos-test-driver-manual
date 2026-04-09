@@ -1,6 +1,6 @@
-# NixOS Test Driver Manual
+![The NixOS test driver framework](./assets/blog/test-driver-elco.webp){ align=right width="300" }
 
-![The NixOS test driver framework](./assets/blog/test-driver-elco.webp){ align=right width="320" }
+# NixOS Test Driver Manual
 
 Practical guidance for building, debugging, and scaling NixOS integration tests.
 
