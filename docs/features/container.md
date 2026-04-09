@@ -1,5 +1,9 @@
 # Containers in tests
 
+!!! warning "Special host setup necessary"
+
+    See [host configuration](#host-configuration) on this page.
+
 Test nodes can be implemented as containers Instead of [VMs](./vm.md).
 These use [Systemd-nspawn](https://www.freedesktop.org/software/systemd/man/latest/systemd-nspawn.html) as their backend.
 
@@ -55,3 +59,81 @@ An empty NixOS container configuration (`{ }`) creates a VM with the usual NixOS
 Most options can be re-enabled.
 
 For all the details, refer to the [NixOS test module that assembles test node configurations](https://github.com/NixOS/nixpkgs/blob/master/nixos/lib/testing/nodes.nix)
+
+## Host configuration
+
+To enable the containers feature in the NixOS test driver, the Nix daemon needs to be configured properly:
+
+=== "NixOS"
+
+    On NixOS, add the following settings to the system configuration:
+
+    ```nix title="configuration.nix"
+    {
+      nix.settings.auto-allocate-uids = true;
+
+      nix.settings.experimental-features = [
+        "auto-allocate-uids"
+        "cgroups"
+      ];
+
+      nix.settings.extra-system-features = [
+        "uid-range"
+      ];
+    }
+    ```
+
+    Make sure to rebuild your system, which restarts the Nix daemon with the new settings.
+
+=== "Non-NixOS"
+
+    Add the following lines to the Nix daemon configuration (if these lines already exist, make sure to merge the new values with the old ones):
+
+    ``` title="/etc/nix/nix.conf"
+    auto-allocate-uids = true
+    experimental-features = nix-command flakes auto-allocate-uids cgroups
+    extra-system-features = uid-range
+    ```
+
+    Make sure to reload the Nix daemon after applying these settings:
+
+    ```console
+    sudo systemctl restart nix-daemon.service
+    ```
+
+
+### VM ↔ container network communication
+
+Another extra setting is necessary to allow for network communicaton between VMs and containers.
+
+??? warning "Security implications"
+
+    As this setting gives sandbox users access to `/dev/net`, this might impede sandbox security.
+
+=== "NixOS"
+
+    On NixOS, add the following settings to the system configuration:
+
+    ```nix title="configuration.nix"
+    {
+      nix.settings.extra-sandbox-paths = [
+        "/dev/net"
+      ];
+    }
+    ```
+
+    Make sure to rebuild your system, which restarts the Nix daemon with the new settings.
+
+=== "Non-NixOS"
+
+    Add the following lines to the Nix daemon configuration (if these lines already exist, make sure to merge the new values with the old ones):
+
+    ``` title="/etc/nix/nix.conf"
+    extra-sandbox-paths = /dev/net
+    ```
+
+    Make sure to reload the Nix daemon after applying these settings:
+
+    ```console
+    sudo systemctl restart nix-daemon.service
+    ```
