@@ -1,39 +1,56 @@
 # Test Script Linting
 
-The NixOS test driver includes a built-in linter to check your `testScript` for Python errors before running the test.
-
-[Pyflakes](https://pypi.org/project/pyflakes/)
-
-[mypy](https://www.mypy-lang.org/)
-
-## How it Works
-
-The `testScript` is a string containing Python code.
-When the test is built, Nix automatically runs a Python linter (like `flake8`) over the script to ensure there are no syntax errors or common pitfalls.
+The NixOS test driver can validate your Python `testScript` before the test is executed.
+This catches common mistakes early, before resources are wasted on failures that could have been detected at build time.
 
 ## Benefits
 
-- **Early Error Detection**: Catches typos in commands or logic before starting slow VMs.
-- **Improved Code Quality**: Encourages cleaner Python code in your tests.
-- **CI Reliability**: Prevents obviously broken tests from reaching your CI pipeline.
+<!-- prettier-ignore-start -->
 
-## Example Error
+<div class="grid cards" markdown>
 
-If you have a typo in your `testScript`:
+-   :material-bug: **Early Error Detection**
 
-```python
-# typo.nix
-testScript = ''
-  machine.succeed("echo hello")
-  machine.sccced("echo world") # Typo!
-'';
+    ---
+
+    Catch obvious syntax mistakes and logic errors before starting long-running VMs or containers.
+
+-   :material-run-fast: **Increased CI efficiency**
+
+    ---
+
+    Prevent trivially broken test scripts from wasting CI time and resources.
+
+</div>
+
+<!-- prettier-ignore-end -->
+
+## How it Works
+
+The `testScript` is Python code embedded in your test definition.
+When the test is built, the driver runs:
+
+- [Pyflakes](https://pypi.org/project/pyflakes/) to lint the script and catch common Python mistakes
+- [mypy](https://www.mypy-lang.org/) to type-check the script
+
+This means syntax issues, undefined names, and many type-related mistakes are reported before the test itself starts running.
+
+## Skipping Checks During Development
+
+For rapid local iteration, the test options reference in the [NixOS manual](https://nixos.org/manual/nixos/stable/#sec-test-options-reference) provides two escape hatches:
+
+```nix title="test.nix"
+{
+  name = "my test";
+
+  skipLint = true;      # disables the Pyflakes check
+  skipTypeCheck = true; # disables the mypy check
+
+  # ...
+}
 ```
 
-Nix will fail the build with a message like:
+Both options default to `false`.
 
-```text
-error: test script linting failed
-  /nix/store/.../test-script.py:2:10: undefined name 'machine.sccced'
-```
-
-Linting is enabled by default for all NixOS integration tests.
+Disabling these checks can speed up rebuilds while you are changing a test frequently.
+That can be useful during development, but tests with linting or type-checking disabled should generally not be committed to production repositories.
