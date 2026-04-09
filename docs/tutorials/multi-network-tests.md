@@ -10,7 +10,7 @@ In this example, we let two machines ping each other:
 
 ```plantuml
 @startuml
-scale 2
+scale 1.5
 machine1 -> machine2 : ping
 machine2 -> machine1 : ping
 @enduml
@@ -37,7 +37,7 @@ Then, we let them ping each other:
 
 ```plantuml
 @startuml
-scale 2
+scale 1.5
 participant "machine1" as m1 << VLAN 1 >>
 participant "machine2" as m2 << VLAN 1 & 2 >>
 participant "machine3" as m3 << VLAN 2 >>
@@ -68,9 +68,11 @@ m3 -[#red]>x m1 : ping
 
 VLANs are a powerful way to test complex network architectures like firewalls, routers, and isolated service enclaves.
 
-Another interesting real-life example is the [Bittorrent test in nixpkgs](https://github.com/NixOS/nixpkgs/blob/master/nixos/tests/bittorrent.nix) which uses the following network configuration:
+!!! note "The Bittorrent test in nixpkgs"
 
-<figure markdown="span">
-  ![Bittorrent test multi-network configuration with NAT routing](../assets/bittorrent-test.png){ width=500 }
-  <figcaption>Bittorrent test multi-network configuration with NAT routing</figcaption>
-</figure>
+    Another interesting real-life example is the [Bittorrent test in nixpkgs](https://github.com/NixOS/nixpkgs/blob/master/nixos/tests/bittorrent.nix) which uses the following network configuration:
+
+    <figure markdown="span">
+      ![Bittorrent test multi-network configuration with NAT routing](../assets/bittorrent-test.png){ width=500 }
+      <figcaption>Bittorrent test multi-network configuration with NAT routing</figcaption>
+    </figure>

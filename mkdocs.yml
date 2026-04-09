@@ -152,7 +152,6 @@ nav:
       - features/error-hook.md
   - Tutorials:
       - tutorials/index.md
-      - tutorials/test-in-extra-package.md
       - tutorials/connecting-to-nodes-in-interactive.md
       - tutorials/multi-network-tests.md
       - tutorials/graphical-vm-tests.md
