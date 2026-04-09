@@ -44,11 +44,12 @@
           formatter = treefmtEval.config.build.wrapper;
 
           packages = {
-            test-minimal = pkgs.testers.runNixOSTest ./examples/minimal.nix;
-            test-ping = pkgs.testers.runNixOSTest ./examples/ping.nix;
-            test-multi-network = pkgs.testers.runNixOSTest ./examples/multi-network.nix;
-            test-echo = pkgs.testers.runNixOSTest ./examples/echo;
             test-browser = pkgs.testers.runNixOSTest ./examples/browser.nix;
+            test-echo = pkgs.testers.runNixOSTest ./examples/echo;
+            test-minimal = pkgs.testers.runNixOSTest ./examples/minimal.nix;
+            test-multi-network = pkgs.testers.runNixOSTest ./examples/multi-network.nix;
+            test-overlay = pkgs.testers.runNixOSTest ./examples/overlay.nix;
+            test-ping = pkgs.testers.runNixOSTest ./examples/ping.nix;
           };
 
           devShells.default = pkgs.mkShell {

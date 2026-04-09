@@ -6,7 +6,7 @@ The NixOS integration test driver is a powerful tool with many advanced features
 
 <div class="grid cards" markdown>
 
--   [:simple-qemu: **Virtual machines**](./container.md)
+-   [:simple-qemu: **Virtual machines**](./vm.md)
 
     ---
 
