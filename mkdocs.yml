@@ -158,8 +158,8 @@ nav:
       - tutorials/applying-overlays.md
       - tutorials/cuda-tests.md
   - Best Practices:
-      - best-practises/index.md
-      - best-practises/timeout.md
-      - best-practises/service-race-conditions.md
-      - best-practises/pkgs-attribute.md
-      - best-practises/use-parallelism.md
+      - best-practices/index.md
+      - best-practices/timeout.md
+      - best-practices/service-race-conditions.md
+      - best-practices/pkgs-attribute.md
+      - best-practices/use-parallelism.md

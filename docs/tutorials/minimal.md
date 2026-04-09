@@ -139,7 +139,7 @@ Run the test:
 
     Deep dives into the driver's capabilities like VMs and containers, the interactive mode, graphics, OCR, test linting.
 
--   [:tools: **Best Practices**](../best-practises/index.md)
+-   [:tools: **Best Practices**](../best-practices/index.md)
 
     ---
 

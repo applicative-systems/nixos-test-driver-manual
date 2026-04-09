@@ -35,7 +35,7 @@ Need a working example? Go to [Tutorials](./tutorials/index.md).
 
     Browse the driver's capabilities in focused reference-style guides.
 
--   [:tools: **Best Practices**](./best-practises/index.md)
+-   [:tools: **Best Practices**](./best-practices/index.md)
 
     ---
 
@@ -65,7 +65,7 @@ Need a working example? Go to [Tutorials](./tutorials/index.md).
 
 -   :material-palette-swatch-variant: **I want production-grade patterns**
 
-    Read the [Best Practices](./best-practises/index.md) for timeouts, synchronization, portability, and multi-node parallelism.
+    Read the [Best Practices](./best-practices/index.md) for timeouts, synchronization, portability, and multi-node parallelism.
 
 </div>
 
