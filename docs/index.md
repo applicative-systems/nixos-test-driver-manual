@@ -82,9 +82,18 @@ The official manual is a complete reference guide. This manual, on the other han
 
     [**Visit**](https://nixcademy.com/posts/running-nixos-integration-tests-on-macos/)
 
+-   **Nixcon Talk: Mastering NixOS integration tests**
+
+    ---
+
+    ![Nixcon Talk: Mastering NixOS integration tests](./assets/mastering-tests-talk.jpg){ width=200 align=left }
+
+    Talk slides and examples of the well-received Nixcon/Planet Nix workshops on the test driver.
+
+    [**Visit**](https://github.com/applicative-systems/nixos-test-driver-nixcon)
+
 </div>
 
 <!-- prettier-ignore-end -->
 
-- [NixCon Demo Repository](https://github.com/applicative-systems/nixos-test-driver-nixcon)
-- [GPU Acceleration in Tests](https://github.com/applicative-systems/nixos-gpu-tests)
+- [GPU Acceleration in Tests example repo](https://github.com/applicative-systems/nixos-gpu-tests)
