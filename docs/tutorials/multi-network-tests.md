@@ -6,6 +6,16 @@ NixOS integration tests excel at orchestrating complex network setups with multi
 
 By default, nodes in a test can communicate with each other using their hostnames.
 
+In this example, we let two machines ping each other:
+
+```plantuml
+@startuml
+scale 2
+machine1 -> machine2 : ping
+machine2 -> machine1 : ping
+@enduml
+```
+
 !!! example "Run this example test yourself"
 
     To run this test directly from the example repository, run:
@@ -21,6 +31,28 @@ By default, nodes in a test can communicate with each other using their hostname
 ## Using Multiple Networks (VLANs)
 
 You can isolate nodes into different networks by using the `virtualisation.vlans` option (see also [official docs](https://nixos.org/manual/nixos/stable/#sec-nixos-test-nodes)).
+
+In this example, we set up two networks with 3 machines, but without routing.
+Then, we let them ping each other:
+
+```plantuml
+@startuml
+scale 2
+participant "machine1" as m1 << VLAN 1 >>
+participant "machine2" as m2 << VLAN 1 & 2 >>
+participant "machine3" as m3 << VLAN 2 >>
+m1 -> m2 : ping
+m2 -> m1 : ping
+
+m2 -> m3: ping
+m3 -> m2: ping
+
+hnote across: machine1 and machine3 cannot\nreach each other because machine2\nis not configured as a router
+
+m1 -[#red]>x m3 : ping
+m3 -[#red]>x m1 : ping
+@enduml
+```
 
 !!! example "Run this example test yourself"
 
