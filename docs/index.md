@@ -11,6 +11,26 @@ opinionated, example-driven, and focused on helping you get productive quickly.
 New here? Start with [Setup](./setup.md).
 Need a working example? Go to [Tutorials](./tutorials/index.md).
 
+<!-- prettier-ignore-start -->
+
+<div class="grid cards" markdown>
+
+-   :material-server-network: **Model real systems**
+
+    Test one machine or whole networks of services with reproducible infrastructure.
+
+-   :material-bug-check: **Debug failures interactively**
+
+    Keep machines alive, log in, inspect state, and turn flaky CI failures into something you can reason about.
+
+-   :simple-nixos: **Use the same tooling as `nixpkgs`**
+
+    Learn the framework that powers the upstream NixOS integration test suite.
+
+</div>
+
+<!-- prettier-ignore-end -->
+
 ## Browse the Manual
 
 <!-- prettier-ignore-start -->
@@ -83,12 +103,35 @@ This manual complements it with a different goal:
 If you already know the reference, this manual helps you move faster.
 If you are new to the test driver, it gives you a clearer path through the material.
 
+## How It Fits Together
+
+<figure markdown="span">
+  ![NixOS test driver architecture](./assets/integration-test-driver-architecture.png){ width=700 }
+  <figcaption>The test driver coordinates declarative machine setup with imperative test execution.</figcaption>
+</figure>
+
 ## Maintained in Practice
 
 This manual is maintained by the [Applicative Systems Group](https://applicative.systems), which contributes to and works with the NixOS test-driver ecosystem in production settings.
 
 The Python test driver that became the standard implementation in `nixpkgs` was authored by [Jacek Galowicz](https://galowicz.de) ([`@tfc`](https://github.com/tfc)) together with collaborators and later adopted across the NixOS test suite.
 Since then, the ecosystem has continued to grow with further work such as container support and broader operational guidance.
+
+<!-- prettier-ignore-start -->
+
+<div class="grid cards" markdown>
+
+-   **Applicative Systems Group**
+
+    Maintains practical expertise around the NixOS test-driver ecosystem, CI workflows, and advanced test infrastructure.
+
+-   **Jacek Galowicz (`@tfc`)**
+
+    Author of the Python test driver and curator of this manual.
+
+</div>
+
+<!-- prettier-ignore-end -->
 
 If you need help with NixOS integration testing, CI, or custom test infrastructure:
 
