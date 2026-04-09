@@ -5,9 +5,13 @@
 Practical guidance for building, debugging, and scaling NixOS integration tests.
 
 The NixOS test driver is the framework behind the integration tests used throughout [`nixpkgs`](https://github.com/NixOS/nixpkgs), where it orchestrates networks of virtual machines and other test environments.
-This manual is the hands-on companion to the official documentation: opinionated, example-driven, and focused on helping you get productive quickly.
+This manual is the hands-on companion to the [official documentation](https://nixos.org/manual/nixos/stable/#sec-nixos-tests):
+opinionated, example-driven, and focused on helping you get productive quickly.
 
-## Start Here
+New here? Start with [Setup](./setup.md).
+Need a working example? Go to [Tutorials](./tutorials/index.md).
+
+## Browse the Manual
 
 <!-- prettier-ignore-start -->
 
@@ -47,7 +51,7 @@ This manual is the hands-on companion to the official documentation: opinionated
 
 <div class="grid cards" markdown>
 
--   :material-new-box: **I am new to NixOS tests**
+-   :material-new-box: **I want to get started**
 
     Start with [Setup](./setup.md), then continue with [A minimal test](./tutorials/minimal.md).
 
@@ -81,9 +85,9 @@ If you are new to the test driver, it gives you a clearer path through the mater
 
 ## Maintained in Practice
 
-This manual is published by the [Applicative Systems Group](https://applicative.systems), which actively works with the NixOS test-driver ecosystem in practice.
+This manual is maintained by the [Applicative Systems Group](https://applicative.systems), which contributes to and works with the NixOS test-driver ecosystem in production settings.
 
-The Python test driver that became the standard implementation in `nixpkgs` was authored by Jacek Galowicz ([`@tfc`](https://github.com/tfc)) together with collaborators and later adopted across the NixOS test suite.
+The Python test driver that became the standard implementation in `nixpkgs` was authored by [Jacek Galowicz](https://galowicz.de) ([`@tfc`](https://github.com/tfc)) together with collaborators and later adopted across the NixOS test suite.
 Since then, the ecosystem has continued to grow with further work such as container support and broader operational guidance.
 
 If you need help with NixOS integration testing, CI, or custom test infrastructure:
@@ -96,13 +100,15 @@ If you need help with NixOS integration testing, CI, or custom test infrastructu
 
 The NixOS test driver has a long history in `nixpkgs`:
 
-- the original VM test framework was introduced in 2009
-- the Python driver was introduced in 2019 by Jacek Galowicz ([`@tfc`](https://github.com/tfc)) together with Julian Stecklina ([@blitz](https://github.com/blitz)) and Jana Traue ([@jtraue](https://github.com/jtraue)) and became the standard implementation
-- container support has been added in 2026 by Jacek Galowicz ([`@tfc`](https://github.com/tfc)), Kierán Meinhardt ([`@kmein`](https://github.com/kmein)), and Jeremy Fleischman ([`@jfly`](https://github.com/jfly)), based on a first implementation by the [Clan project](https://clan.lol/).
+- the original VM test framework was introduced in 2009:
+  [original commit](https://github.com/NixOS/nixpkgs/commit/27a8e656bc2a99a0451f0c84481083498e779817)
+- the Python driver was introduced in 2019 by Jacek Galowicz ([`@tfc`](https://github.com/tfc)) together with Julian Stecklina ([@blitz](https://github.com/blitz)) and Jana Traue ([@jtraue](https://github.com/jtraue)), and became the standard implementation:
+  [original commit](https://github.com/NixOS/nixpkgs/commit/3a28fefe7d4e7d842304ff4eee42c76593194b0a)
+- container support was added in 2026 by Jacek Galowicz ([`@tfc`](https://github.com/tfc)), Kierán Meinhardt ([`@kmein`](https://github.com/kmein)), and Jeremy Fleischman ([`@jfly`](https://github.com/jfly)), based on a first implementation by the [Clan project](https://clan.lol/). Special thanks go to Maximilian Bosch ([`@ma27`](https://github.com/Ma27)).
 
-The test driver is used by [1000+ tests in nixpkgs](https://github.com/NixOS/nixpkgs/tree/master/nixos/tests) and has hundreds of industrial downstream users.
+The driver is used by [1000+ tests in nixpkgs](https://github.com/NixOS/nixpkgs/tree/master/nixos/tests) and also sees substantial downstream use beyond upstream NixOS itself.
 
-## Talks and Deep Dives
+## Further references
 
 <!-- prettier-ignore-start -->
 
