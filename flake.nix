@@ -25,7 +25,7 @@
         "aarch64-darwin"
       ];
       perSystem =
-        { pkgs, config, ... }:
+        { pkgs, config, system, ... }:
         let
           treefmtEval = inputs.treefmt-nix.lib.evalModule pkgs {
             projectRootFile = "flake.nix";
@@ -37,6 +37,14 @@
               statix.enable = true;
             };
           };
+
+          # in the future, this should not be necessary as reqs should be
+          # communicated from within the test.
+          addRequiredFeatures =
+            reqs: drv:
+            drv.overrideTestDerivation (old: {
+              requiredSystemFeatures = old.requiredSystemFeatures ++ reqs;
+            });
         in
         {
           documentation.mkdocs-root = ./.;
@@ -50,6 +58,8 @@
             test-multi-network = pkgs.testers.runNixOSTest ./examples/multi-network.nix;
             test-overlay = pkgs.testers.runNixOSTest ./examples/overlay.nix;
             test-ping = pkgs.testers.runNixOSTest ./examples/ping.nix;
+            test-cuda-nvidia = addRequiredFeatures [ "cuda" ] (pkgs.testers.runNixOSTest ./examples/cuda/nvidia.nix);
+            test-cuda-amd = addRequiredFeatures [ "cuda" ] (pkgs.testers.runNixOSTest ./examples/cuda/amd.nix);
           };
 
           devShells.default = pkgs.mkShell {
@@ -60,6 +70,20 @@
 
           checks = config.packages // {
             formatting = treefmtEval.config.build.check inputs.self;
+          };
+
+          # necessary minimum to run the CUDA examples
+          _module.args.pkgs = import inputs.nixpkgs {
+            inherit system;
+            overlays = [
+              (import ./examples/cuda/overlay.nix)
+            ];
+            config = {
+              allowUnfree = true;
+              cudaSupport = true;
+              cudaForwardCompat = false;
+              cudaCapabilities = [ "6.1" ];
+            };
           };
         };
     };

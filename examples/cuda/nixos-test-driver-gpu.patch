@@ -1,0 +1,14 @@
+--- a/test_driver/driver.py
++++ b/test_driver/driver.py
+@@ -146,6 +146,9 @@ class Driver:
+         # set up prerequisites for systemd-nspawn containers.
+         # these are not guaranteed to be set up in the Nix sandbox.
+         # if running interactively as root, these will already be set up.
++        if Path("/run").exists():
++            Path("/host/run").mkdir(parents=True)
++            subprocess.run(["mount", "--bind", "/run", "/host/run"], check=True)
+
+         # check if /run is writable by root
+         if not os.access("/run", os.W_OK):
+--
+2.53.0
