@@ -126,6 +126,8 @@ markdown_extensions:
 
 extra:
   social:
+    - icon: simple/element
+      link: https://matrix.to/#/#applicative.systems:matrix.org
     - icon: fontawesome/brands/github
       link: https://github.com/applicative-systems
     - icon: fontawesome/brands/x-twitter

@@ -26,6 +26,36 @@ The official manual is a complete reference guide. This manual, on the other han
 
 <!-- prettier-ignore-end -->
 
+## Test driver history
+
+- first version was implemented in PErl in 2009. Original commit: https://github.com/NixOS/nixpkgs/commit/27a8e656bc2a99a0451f0c84481083498e779817
+- Port to Python in 2019, became the standard test driver in
+  - original commit https://github.com/NixOS/nixpkgs/commit/3a28fefe7d4e7d842304ff4eee42c76593194b0a
+
+release note of the python port:
+
+```
+The testing driver implementation in NixOS is now in Python make-test-python.nix. This was done by Jacek Galowicz (@tfc), and with the collaboration of Julian Stecklina (@blitz) and Jana Traue (@jtraue). All documentation has been updated to use this testing driver, and a vast majority of the 286 tests in NixOS were ported to python driver. In 20.09 the Perl driver implementation, make-test.nix, is slated for removal. This should give users of the NixOS integration framework a transitory period to rewrite their tests to use the Python implementation. Users of the Perl driver will see this warning every time they use it:
+
+warning: Perl VM tests are deprecated and will be removed for 20.09.
+Please update your tests to use the python test driver.
+See https://github.com/NixOS/nixpkgs/pull/71684 for details.
+
+API compatibility is planned to be kept for at least the next release with the perl driver.
+```
+
+- container support has been added by @applicative-systems, implemented by @kmein, @jfly, @tfc
+
+## Commercial support
+
+Applicative Systems maintains the test driver in nixpkgs.
+
+Contact Applicative Systems for support:
+
+- 📧 [hello@applicative.systems](mailto:hello@applicative.systems)
+- Join our [Matrix channel](https://matrix.to/#/#applicative.systems:matrix.org)
+- Report issues on [GitHub](https://github.com/applicative-systems/nixos-test-driver-manual/issues)
+
 ## Further resources
 
 <!-- prettier-ignore-start -->
