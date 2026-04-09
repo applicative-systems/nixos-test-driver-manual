@@ -2,7 +2,7 @@ site_name: NixOS Test Driver Manual
 site_url: https://applicative.systems/nixos-test-driver
 site_author: Jacek Galowicz
 site_description: >-
-  Inofficial NixOS Test Driver Manual with hands-on character and many examples and tutorials. Learn how to unlock the full potential here.
+  Opinionated NixOS Test Driver Manual with hands-on character and many examples and tutorials. Learn how to unlock the full potential here.
 copyright: Copyright &copy; 2026 <a href="https://applicative.systems">Applicative Systems Group</a>
 repo_url: https://github.com/applicative-systems/nixos-test-driver-manual
 repo_name: applicative-systems/nixos-test-driver-manual
