@@ -25,7 +25,12 @@
         "aarch64-darwin"
       ];
       perSystem =
-        { pkgs, config, system, ... }:
+        {
+          pkgs,
+          config,
+          system,
+          ...
+        }:
         let
           treefmtEval = inputs.treefmt-nix.lib.evalModule pkgs {
             projectRootFile = "flake.nix";
@@ -58,7 +63,9 @@
             test-multi-network = pkgs.testers.runNixOSTest ./examples/multi-network.nix;
             test-overlay = pkgs.testers.runNixOSTest ./examples/overlay.nix;
             test-ping = pkgs.testers.runNixOSTest ./examples/ping.nix;
-            test-cuda-nvidia = addRequiredFeatures [ "cuda" ] (pkgs.testers.runNixOSTest ./examples/cuda/nvidia.nix);
+            test-cuda-nvidia = addRequiredFeatures [ "cuda" ] (
+              pkgs.testers.runNixOSTest ./examples/cuda/nvidia.nix
+            );
             test-cuda-amd = addRequiredFeatures [ "cuda" ] (pkgs.testers.runNixOSTest ./examples/cuda/amd.nix);
           };
 

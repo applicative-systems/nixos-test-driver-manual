@@ -101,7 +101,6 @@ To enable the containers feature in the NixOS test driver, the Nix daemon needs 
     sudo systemctl restart nix-daemon.service
     ```
 
-
 ### VM ↔ container network communication
 
 Another extra setting is necessary to allow for network communicaton between VMs and containers.

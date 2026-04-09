@@ -6,7 +6,6 @@ NixOS integration tests provide a sophisticated networking environment that allo
 
 The NixOS test driver uses QEMU's networking capabilities and [VDE (Virtual Distributed Ethernet) tools](https://en.wikipedia.org/wiki/Virtual_Distributed_Ethernet) to connect virtual machines.
 
-
 <figure markdown="span">
   ![Test driver networking architecture](../assets/integration-test-driver-architecture.png){ width=500 }
   <figcaption>Test driver networking architecture</figcaption>
