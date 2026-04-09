@@ -6,7 +6,7 @@ site_description: >-
 copyright: Copyright &copy; 2026 <a href="https://applicative.systems">Applicative Systems Group</a>
 repo_url: https://github.com/applicative-systems/nixos-test-driver-manual
 repo_name: applicative-systems/nixos-test-driver-manual
-edit_uri: edit/main/documentation/docs
+edit_uri: edit/main/docs
 
 plugins:
   - glightbox
