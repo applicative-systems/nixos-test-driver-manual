@@ -1,8 +1,8 @@
 @font-face {
   font-family: "Raleway";
   src:
-    url("assets/font/Raleway-VariableFont_wght.ttf") format('truetype'),
-    url("assets/font/Raleway-Italic-VariableFont_wght.ttf") format('truetype');
+    url("assets/font/Raleway-VariableFont_wght.ttf") format("truetype"),
+    url("assets/font/Raleway-Italic-VariableFont_wght.ttf") format("truetype");
 }
 
 :root {
