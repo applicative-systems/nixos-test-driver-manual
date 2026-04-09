@@ -31,7 +31,7 @@ In the end, we perform a screenshot:
 <figure markdown="span">
   ![NixOS test driver screenshot](../assets/browser-test-it-works.png){ width=400 }
 
-  <figcaption>The screenshot at the and of the test</figcaption>
+  <figcaption>The screenshot at the end of the test</figcaption>
 </figure>
 
 ```nix title="browser.nix"

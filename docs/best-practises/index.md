@@ -1,4 +1,4 @@
-# Best Practises
+# Best Practices
 
 These guides collect operational advice for writing NixOS tests that are fast to debug, robust in CI, and portable across different environments.
 

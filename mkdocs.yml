@@ -157,7 +157,7 @@ nav:
       - tutorials/graphical-vm-tests.md
       - tutorials/applying-overlays.md
       - tutorials/cuda-tests.md
-  - Best Practises:
+  - Best Practices:
       - best-practises/index.md
       - best-practises/timeout.md
       - best-practises/service-race-conditions.md

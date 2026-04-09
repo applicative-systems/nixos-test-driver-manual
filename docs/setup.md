@@ -36,7 +36,7 @@ To run NixOS integration tests, you basically just need Nix and, for the best ex
 
     Hardware-accelerated virtualisation makes VM tests fast.
 
-    [:octicons-arrow-right-16: See KVM check](#nix)
+    [:octicons-arrow-right-16: See KVM check](#linux-kvm)
 
 </div>
 

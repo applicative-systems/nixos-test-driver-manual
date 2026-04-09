@@ -139,11 +139,11 @@ Run the test:
 
     Deep dives into the driver's capabilities like VMs and containers, the interactive mode, graphics, OCR, test linting.
 
--   [:tools: **Best practises**](../best-practises/index.md)
+-   [:tools: **Best Practices**](../best-practises/index.md)
 
     ---
 
-    Do's and dont's from experience.
+    Dos and don'ts from experience.
 
 -   [:bookmark: **The test driver chapter of the NixOS manual**](https://nixos.org/manual/nixos/stable/#sec-nixos-tests)
 

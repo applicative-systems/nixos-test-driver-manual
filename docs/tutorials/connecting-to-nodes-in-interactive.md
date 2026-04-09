@@ -136,9 +136,9 @@ That gives you a normal shell on the guest, which is often the most convenient w
 
     ---
 
-    - you want a more native shell experience
-    - you want to keep a separate terminal open while using the Python prompt
-    - you need a more robust setup for longer debugging sessions
+    - You want a more native shell experience
+    - You want to keep a separate terminal open while using the Python prompt
+    - You need a more robust setup for longer debugging sessions
 
 </div>
 
@@ -162,10 +162,17 @@ That gives you a normal shell on the guest, which is often the most convenient w
 
     Can't reproduce rare flaky test failures? Hook into the test sandbox when it happens!
 
-
 -   [:bookmark: **NixOS manual: machine methods**](https://nixos.org/manual/nixos/stable/#ssec-machine-objects)
 
+    ---
+
+    Reference for the machine methods available in `testScript`, including interactive shell helpers.
+
 -   [:bookmark: **NixOS manual: `sshBackdoor` setting**](https://nixos.org/manual/nixos/stable/#test-opt-sshBackdoor.enable)
+
+    ---
+
+    Full option reference for enabling SSH access to test machines over VSOCK.
 
 </div>
 
