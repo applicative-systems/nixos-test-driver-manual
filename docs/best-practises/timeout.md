@@ -1,24 +1,63 @@
-# Always set timeouts
+# Always Set Timeouts
 
-always set timeouts
+Timeouts are one of the simplest ways to make NixOS tests more practical to work with.
+Without them, a broken service or unreachable port can leave a test hanging until the full build timeout is reached.
 
-- top-level attribute `globalTimeout` exists
-  - nixos manual link: https://nixos.org/manual/nixos/stable/#test-opt-globalTimeout
-  - explanation: A global timeout for the complete test, expressed in seconds. Beyond that timeout, every resource will be killed and released and the test will fail. default is 1 hour.
+## Why This Matters
 
-machine methods with timeouts (list these as a nice table):
+<!-- prettier-ignore-start -->
 
-the list is rather long and the nixos manual already lists them here: https://nixos.org/manual/nixos/stable/#ssec-machine-objects
+<div class="grid cards" markdown>
 
-show these as an example:
+- :octicons-loop-16: Faster failures give developers a tighter feedback loop.
+- :material-run-fast: Shorter failing runs free CI capacity for other jobs.
 
-these methods are typically used without timeouts but individual timeouts can be set. see the manual for all the other functions with timeouts.
+</div>
 
-- wait_for_open_port(port, addr, timeout)
-- wait_for_closed_port(port, addr, timeout)
+<!-- prettier-ignore-end -->
 
-why would you want to use timeouts:
+Use the global timeout as a safety net and smaller per-operation timeouts where you know the expected behavior more precisely.
 
-- make tests fail faster if they take much too long
-- developers get faster feedback loops this way
-- when tests fail earlier in the CI, resources are freed for other tests. better overall throughput.
+## Use a Global Timeout
+
+The top-level `globalTimeout` option limits the total runtime of the test.
+It is documented in the [NixOS manual](https://nixos.org/manual/nixos/stable/#test-opt-globalTimeout).
+
+```nix title="test.nix"
+{
+  name = "example-test";
+  globalTimeout = 600;
+
+  nodes.machine = { ... }: {
+    # configuration
+  };
+
+  testScript = ''
+    # test code
+  '';
+}
+```
+
+`globalTimeout` is expressed in seconds and defaults to one hour.
+That default is safe, but it is often longer than you actually want during development or in CI.
+
+## Individual per-operation timeouts
+
+Many machine methods also accept explicit timeouts.
+The full list is documented in the [machine objects reference](https://nixos.org/manual/nixos/stable/#ssec-machine-objects).
+
+These two are especially common in service tests:
+
+| Method                                      | Typical use                                                       |
+| ------------------------------------------- | ----------------------------------------------------------------- |
+| `wait_for_open_port(port, addr, timeout)`   | Wait until a service is ready to accept connections               |
+| `wait_for_closed_port(port, addr, timeout)` | Wait until a service has fully stopped or a restart has completed |
+
+Example:
+
+```python
+machine.wait_for_open_port(8080, timeout=20)
+machine.wait_for_closed_port(8080, timeout=20)
+```
+
+Per-operation timeouts are useful when you know a condition should become true quickly and want failures to surface immediately.

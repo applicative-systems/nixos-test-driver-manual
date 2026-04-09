@@ -1,23 +1,21 @@
-# Avoid race-conditions
+# Avoid race conditions
 
-excerpt from the anti-patterns book:
+It can happen that a NixOS test fails only on some machines, or only in CI, because it starts asserting on a service before the system is actually ready.
+The usual fix is not more retries, but better synchronization.
 
-#import "/globals.typ": *
+## Wait for the right events in the right order
 
-== Double check service units and open ports
+For networked services, a reliable test usually has three phases:
 
-It can happen that a test with one or multiple VMs runs well on slower
-hardware (like your laptop) but then fails on faster hardware
-(like your CI).
+1. Ensure the required machines are online.
+2. Wait for the relevant systemd unit to start.
+3. Wait for the service port to become reachable before exercising it.
 
-In this example we are looking at a very typical test that will not
-have this problem and discuss, why:
+This pattern is robust on both slow and fast hardware:
 
-#code-box-good(
-```nix
-# file: test.nix
+```nix title="test.nix"
 {
-  name = "Hello Test";
+  name = "HTTP test";
 
   nodes = {
     server = {
@@ -30,96 +28,49 @@ have this problem and discuss, why:
   testScript = ''
     start_all()
 
-    # 1. ensure networking
+    # Make sure network target is reached on all machines
     for m in [server, client]:
       m.systemctl("start network-online.target")
       m.wait_for_unit("network-online.target")
 
-    # 2. ensure service
+    # Wait until the service in question is ready
     server.wait_for_unit("httpd.service")
+
+    # Wait until the port has actually opened
     server.wait_for_open_port(80)
 
-    # 3. test service
     client.succeed("curl http://server")
   '';
 }
 ```
-)
 
-The Nix snippet for creating a derivation from this test is:
+??? question "Why wait for the port too?"
 
-#code-box(
-```nix
-test = pkgs.testers.runNixOSTest ./test.nix;
-```
-)
+    Waiting for `httpd.service` alone is often not enough.
+    A systemd unit can report as started while the process is still finishing initialization and is not *yet* ready to accept connections.
 
-To make this test completely reliable on slow and fast machines,
-the exercise performs the following steps:
+    That timing gap is exactly the kind of race that may pass on a laptop and fail in a much bigger and faster CI machine.
+    `wait_for_open_port` closes that gap by synchronizing on actual network readiness.
 
-#[
+??? question "Why not only wait for the port?"
 
-#set enum(numbering: "1.a.")
+    This version is weaker:
 
-+ Because networking is required, start `network-online.target` and
-  wait for this systemd unit to finish.
-+
-  + Make sure to wait for the to-be-tested service's systemd unit startup to finish.
-  + In addition to the systemd unit start, wait for the system's
-    port(s) to open.
-+ Test the service meaningfully.
-]
+    ```python
+    server.wait_for_open_port(80)
+    client.succeed("curl http://server")
+    ```
 
-#note-box[
-Point 1 might be new or surprising to some:
-In NixOS, the systemd target `network-online.target` is no longer a direct dependency of `multi-user.target`, which is more _correct_ but also introduced some hanging tests here and there.
-]
+    If the service never starts because of a configuration error, the test now sits in a timeout loop and reports the failure later and with less context.
 
-=== Why wait for the port in addition to the systemd unit?
+    Waiting for the systemd unit first gives you faster and more informative failures:
 
-On slower machines, a test like this will most likely always work:
+    - if the service crashes during startup, `wait_for_unit` fails early
+    - if the unit starts but the socket is not ready yet, `wait_for_open_port` handles the remaining synchronization
 
-#code-box-bad(
-```
-server.wait_for_unit("httpd.service")
-client.succeed("curl http://server")
-```
-)
+    Use both checks when you test a network service.
 
-Then, on a faster machine, the test might _often_ fail on the second
-line.
-Why?
-Slow machines take some time between these lines, but very often, fast
-machines with many cores start sending network packets to the service
-while the process behind the systemd service unit is still in some
-startup routine (e.g. checking config files and starting child
-processes).
+!!! note "A Note on Networking"
 
-Waiting for the port to open is the only way to make sure that the
-service is really ready for work.
-
-=== Why not _only_ wait for the port?
-
-Now, one might think: "It's easier and more straight-forward to just
-test for the port - I am not testing to see if systemd works in
-general, anyway."
-and then write test code like this:
-
-#code-box-bad(
-```
-server.wait_for_open_port(80)
-client.succeed("curl http://server")
-```
-)
-
-The nature of `wait_for_open_port` is to loop until the port is open.
-A timeout will throw an exception after some time if the port does not
-open.
-
-One common reason for the port not to open is configuration errors.
-In that case, this code would block the build infrastructure for a minute before it errors out -- and then even lack information on _why_ the test failed.
-
-Waiting for the systemd unit first and _then_ waiting for the port
-ensures that the service comes up at all before entering the timeout loop.
-If anything happens inbetween, the test fails earlier and provides better information about the reason.
-At the same time, it provides the right synchronisation to properly run on fast and slow machines.
+    If your test depends on networking, it is often worth explicitly waiting for `network-online.target` on the participating machines.
+    That reduces another common source of flaky behavior, especially in multi-node tests.
