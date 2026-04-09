@@ -10,13 +10,11 @@ edit_uri: edit/main/documentation/docs
 
 plugins:
   - glightbox
-  - offline
   - search
   - tags
 
 theme:
-  font:
-    text: Raleway
+  font: false
   language: en
   name: material
 
