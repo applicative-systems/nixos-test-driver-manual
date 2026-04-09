@@ -1,6 +1,8 @@
 # Graphical VMs and OCR
 
-Let's test something with [optical character recognition](https://en.wikipedia.org/wiki/Optical_character_recognition) (OCR) in a graphical VM.
+Let's test something with [optical character recognition (OCR)](https://en.wikipedia.org/wiki/Optical_character_recognition) in a graphical VM.
+
+!!! note "For more general information about screenshots and OCR [refer to the features section](../features/screenshots-and-ocr.md)"
 
 !!! example "Run this example test yourself"
 
@@ -62,4 +64,4 @@ We use the following specialized graphical machine methods on the client:
 | `client.wait_for_text(<regex: text to wait for>)` | Blockingly wait for a text snippet to appear on the screen                            |
 
 This list is not complete.
-For more details and methods, refer to the [official manual](https://nixos.org/manual/nixos/stable/#ssec-machine-objects)).
+For more details and methods, refer to the [official manual](https://nixos.org/manual/nixos/stable/#ssec-machine-objects).

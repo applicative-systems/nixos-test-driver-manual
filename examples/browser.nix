@@ -43,6 +43,8 @@
 
     client.wait_for_x()
 
+    client.screenshot("empty-icewm-desktop")
+
     with subtest("open and close firefox"):
       client.succeed("xterm -e 'firefox about:welcome' >&2 &")
       client.wait_for_window("Firefox")
