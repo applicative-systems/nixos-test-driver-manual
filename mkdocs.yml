@@ -18,7 +18,7 @@ theme:
   language: en
   name: material
 
-  logo: assets/applicative-systems-rounded-white.svg
+  logo: assets/applicative-systems-rounded.svg
   icon:
     logo: logo
     repo: fontawesome/brands/github
@@ -54,7 +54,7 @@ theme:
   palette:
     # Palette toggle for automatic mode
     - media: "(prefers-color-scheme)"
-      primary: blue grey
+      primary: white
       accent: grey
       toggle:
         icon: material/brightness-auto
@@ -62,7 +62,7 @@ theme:
 
     # Palette toggle for light mode
     - media: "(prefers-color-scheme: light)"
-      primary: blue grey
+      primary: white
       accent: grey
       toggle:
         icon: material/weather-sunny
