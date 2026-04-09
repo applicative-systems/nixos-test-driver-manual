@@ -18,6 +18,12 @@ The NixOS integration test driver is a powerful tool with many advanced features
 
     A lighter and faster alternative to VMs for tests that don't require custom kernels.
 
+-   [:material-lan: **Networking**](./networking.md)
+
+    ---
+
+    Automated DNS, internal IP schemes, and complex multi-network VLAN setups.
+
 -   [:keyboard: **Interactive mode**](./interactive.md)
 
     ---

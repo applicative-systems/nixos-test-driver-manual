@@ -68,10 +68,9 @@ m3 -[#red]>x m1 : ping
 
 VLANs are a powerful way to test complex network architectures like firewalls, routers, and isolated service enclaves.
 
-If you are interested in setting up routing in your tests, please have a look at existing tests in the nixpkgs repo:
+Another interesting real-life example is the [Bittorrent test in nixpkgs](https://github.com/NixOS/nixpkgs/blob/master/nixos/tests/bittorrent.nix) which uses the following network configuration:
 
-- [`bittorrent.nix` test](https://github.com/NixOS/nixpkgs/blob/master/nixos/tests/bittorrent.nix)
-- [`networking/router.nix` test](https://github.com/NixOS/nixpkgs/blob/master/nixos/tests/networking/router.nix)
-
-![](../assets/bittorrent-test.png){ width=500 }
-![](../assets/integration-test-driver-architecture.png){ width=500 }
+<figure markdown="span">
+  ![Bittorrent test multi-network configuration with NAT routing](../assets/bittorrent-test.png){ width=500 }
+  <figcaption>Bittorrent test multi-network configuration with NAT routing</figcaption>
+</figure>

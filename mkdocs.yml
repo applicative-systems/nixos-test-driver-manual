@@ -144,6 +144,7 @@ nav:
       - features/index.md
       - features/vm.md
       - features/container.md
+      - features/networking.md
       - features/interactive.md
       - features/module-composition.md
       - features/screenshots-and-ocr.md
