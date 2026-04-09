@@ -162,3 +162,4 @@ nav:
       - best-practises/timeout.md
       - best-practises/service-race-conditions.md
       - best-practises/pkgs-attribute.md
+      - best-practises/use-parallelism.md

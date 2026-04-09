@@ -18,6 +18,12 @@ These guides collect operational advice for writing NixOS tests that are fast to
 
     Wait for the right units and ports before asserting on a service.
 
+-   [:material-timeline-clock-outline: **Use parallelism across machines**](./use-parallelism.md)
+
+    ---
+
+    Start long-running setup on all nodes first, then wait for completion so multi-node tests do not serialize unnecessary work.
+
 -   [:material-package-variant: **Use the right `pkgs` attribute**](./pkgs-attribute.md)
 
     ---
