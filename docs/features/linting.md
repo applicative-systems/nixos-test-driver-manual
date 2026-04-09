@@ -2,15 +2,20 @@
 
 The NixOS test driver includes a built-in linter to check your `testScript` for Python errors before running the test.
 
+[Pyflakes](https://pypi.org/project/pyflakes/)
+
+[mypy](https://www.mypy-lang.org/)
+
 ## How it Works
 
-The `testScript` is a string containing Python code. When the test is built, Nix automatically runs a Python linter (like `flake8`) over the script to ensure there are no syntax errors or common pitfalls.
+The `testScript` is a string containing Python code.
+When the test is built, Nix automatically runs a Python linter (like `flake8`) over the script to ensure there are no syntax errors or common pitfalls.
 
 ## Benefits
 
 - **Early Error Detection**: Catches typos in commands or logic before starting slow VMs.
 - **Improved Code Quality**: Encourages cleaner Python code in your tests.
-- **CI Reliability**: Prevents broken tests from reaching your CI pipeline.
+- **CI Reliability**: Prevents obviously broken tests from reaching your CI pipeline.
 
 ## Example Error
 

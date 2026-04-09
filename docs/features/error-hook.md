@@ -1,4 +1,4 @@
-# Error Hooks
+# Debug Hook
 
 The NixOS test driver provides an **error hook** mechanism to collect diagnostic information when a test fails.
 

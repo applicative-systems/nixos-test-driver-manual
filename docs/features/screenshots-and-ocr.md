@@ -11,6 +11,9 @@ The content of the screenshot is the content of the QEMU window without its fram
 
 As this is the raw video output, it does not matter if the VM configuration has any graphical/desktop settings at all.
 
+
+`screenshot(filename)`
+
 ## Configuring a graphical desktop
 
 To configure a graphical default desktop based on a minimal [IceWM](https://ice-wm.org/) setting, add the following to a VM's configuration:
@@ -39,9 +42,22 @@ To configure a graphical default desktop based on a minimal [IceWM](https://ice-
 
 <!-- prettier-ignore-end -->
 
+
 ## Setting the resolution
 
-## Graphical tests in nixpkgs
+## Enabling and using OCR
+
+[`enableOCR`](https://nixos.org/manual/nixos/stable/#test-opt-enableOCR)
+
+`get_screen_text()`
+`get_screen_text_variants()`
+`wait_for_text(regex, timeout)`
+`wait_for_x(timeout)`
+`wait_for_window(regexp, timeout)`
+
+[machine object methods](https://nixos.org/manual/nixos/stable/#ssec-machine-objects)
+
+## Existing graphical tests in nixpkgs
 
 The [`nixpkgs`](https://github.com/nixos/nixpkgs) project already contains these and more graphical tests.
 Each test title links to its implementation for your inspiration.
