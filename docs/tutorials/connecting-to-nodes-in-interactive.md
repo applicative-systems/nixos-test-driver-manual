@@ -30,6 +30,7 @@ It is a good fit when you want to quickly inspect files, run a few commands, or 
 
 For longer debugging sessions, SSH is usually more comfortable.
 The test driver can expose a debugging backdoor over [VSOCK](https://man7.org/linux/man-pages/man7/vsock.7.html), so you can connect to each VM with a normal `ssh` client from the host system.
+Because this uses a host-to-guest VSOCK channel, it does not depend on the VM's existing test network setup and does not require opening ports or otherwise changing the machine's regular network configuration.
 
 This is controlled by [`sshBackdoor.enable`](https://nixos.org/manual/nixos/stable/#test-opt-sshBackdoor.enable).
 When you only want this in interactive mode, enable it under the [`interactive` top-level attribute](../features/interactive.md#adding-extra-configuration-only-in-interactive-mode).
@@ -149,7 +150,7 @@ That gives you a normal shell on the guest, which is often the most convenient w
 
 <div class="grid cards" markdown>
 
--   [:keyboard: **Interactive mode**](./interactive.md)
+-   [:keyboard: **Interactive mode**](../features/interactive.md)
 
     ---
 

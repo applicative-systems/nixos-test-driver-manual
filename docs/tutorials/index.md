@@ -11,7 +11,6 @@ Discover example test use cases with some explanation how they work so you can a
 -   [:material-ssh: **Connect to nodes via SSH/VSOCK**](./connecting-to-nodes-in-interactive.md)
 -   [:desktop: **Screenshots and OCR in graphical VMs**](./graphical-vm-tests.md)
 -   [:simple-nvidia: **Run CUDA apps in test containers**](./cuda-tests.md)
--   [:simple-python: **Develop test scripts in Python IDE**](./test-in-extra-package.md)
 -   [:loop: **Applying overlays in tests**](./applying-overlays.md)
 
 </div>
