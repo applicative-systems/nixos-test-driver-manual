@@ -153,11 +153,11 @@ On the host, the GPU driver must be configured properly, as well as the `nix-req
 
     Hosts with AMD GPUs need [ZLUDA](https://github.com/vosen/ZLUDA) support and can then run the test out of the box.
 
-    ??? example "These configuration options are in the process of being upstreamed"
+    ??? example "These configuration options have just been upstreamed"
 
-        Point your nixpkgs pin to [this private nixpkgs branch](https://github.com/tfc/nixpkgs/tree/zluda-profile) or pick the necessary commits to use them right now.
+        If the attribute `programs.nix-required-mounts.presets.zluda.enable` or `hardware.amdgpu.zluda.enable` don't exist in your NixOS version, please upgrade to the latest nixpkgs.
 
-        This change is currently in the process of being upstreamed in this [nixpkgs PR: #501095 `programs.nix-required-mounts.presets.zluda.enable: init`](https://github.com/NixOS/nixpkgs/pull/501095)
+        (This change was recently merged with [nixpkgs PR: #501095 `programs.nix-required-mounts.presets.zluda.enable: init`](https://github.com/NixOS/nixpkgs/pull/501095))
 
     ```nix title="configuration.nix"
     {
@@ -172,6 +172,8 @@ On the host, the GPU driver must be configured properly, as well as the `nix-req
       hardware.amdgpu.zluda.enable = true;
     }
     ```
+
+Make sure to rebuild your NixOS configuration with these settings.
 
 ## Test driver patch
 
