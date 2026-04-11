@@ -52,11 +52,14 @@
             });
         in
         {
-          documentation.mkdocs-root = ./.;
-          documentation.mkdocs-preBuildHook = ''
-            mkdir -p .cache/plugin/social/fonts/
-            cp -r ${./docs/assets/font/social-fonts-cache}/* .cache/plugin/social/fonts/
-          '';
+          documentation = {
+            mkdocs-root = ./.;
+            mkdocs-preBuildHook = ''
+              mkdir -p .cache/plugin/social/fonts/
+              cp -r ${./docs/assets/font/social-fonts-cache}/* .cache/plugin/social/fonts/
+            '';
+            strict = true;
+          };
 
           formatter = treefmtEval.config.build.wrapper;
 
