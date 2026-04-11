@@ -121,11 +121,13 @@ Since then, the ecosystem has continued to grow with further work such as contai
 
 <div class="grid cards" markdown>
 
--   **Applicative Systems Group**
+-   [**Applicative Systems Group**](https://applicative.systems)
+
+    [![Applicative Systems Group](./assets/applicative-systems-rounded.svg){ width=300 }](https://applicative.systems)
 
     Maintains practical expertise around the NixOS test-driver ecosystem, CI workflows, and advanced test infrastructure.
 
--   **Jacek Galowicz (`@tfc`)**
+-   [**Jacek Galowicz (`@tfc`)**](https://github.com/tfc)
 
     Author of the Python test driver and curator of this manual.
 

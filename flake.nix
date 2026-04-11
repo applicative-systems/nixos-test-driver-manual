@@ -53,6 +53,10 @@
         in
         {
           documentation.mkdocs-root = ./.;
+          documentation.mkdocs-preBuildHook = ''
+            mkdir -p .cache/plugin/social/fonts/
+            cp -r ${./docs/assets/font/social-fonts-cache}/* .cache/plugin/social/fonts/
+          '';
 
           formatter = treefmtEval.config.build.wrapper;
 

@@ -12,6 +12,9 @@ plugins:
   - glightbox
   - search
   - tags
+  - social:
+      cards_layout_options:
+        font_family: Raleway
 
 theme:
   custom_dir: docs/theme-overrides
@@ -19,10 +22,8 @@ theme:
   language: en
   name: material
 
-  logo: assets/applicative-systems-rounded.svg
-  icon:
-    logo: logo
-    repo: fontawesome/brands/github
+  logo: assets/applicative-systems-rounded-square.svg
+  favicon: assets/applicative-systems-rounded-square.png
 
   features:
     - announce.dismiss
