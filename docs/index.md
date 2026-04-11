@@ -112,7 +112,7 @@ If you are new to the test driver, it gives you a clearer path through the mater
 
 ## Maintained in Practice
 
-This manual is maintained by the [Applicative Systems Group](https://applicative.systems), which contributes to and works with the NixOS test-driver ecosystem in production settings.
+This manual is maintained by the [Applicative Systems Group](https://applicative.systems/services), which contributes to and works with the NixOS test-driver ecosystem in production settings.
 
 The Python test driver that became the standard implementation in `nixpkgs` was authored by [Jacek Galowicz](https://galowicz.de) ([`@tfc`](https://github.com/tfc)) together with collaborators and later adopted across the NixOS test suite.
 Since then, the ecosystem has continued to grow with further work such as container support and broader operational guidance.
