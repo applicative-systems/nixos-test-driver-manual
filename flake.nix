@@ -32,6 +32,19 @@
           ...
         }:
         let
+          cudaPkgs = import inputs.nixpkgs {
+            inherit system;
+            overlays = [
+              (import ./examples/cuda/overlay.nix)
+            ];
+            config = {
+              allowUnfree = true;
+              cudaSupport = true;
+              cudaForwardCompat = false;
+              cudaCapabilities = [ "6.1" ];
+            };
+          };
+
           treefmtEval = inputs.treefmt-nix.lib.evalModule pkgs {
             projectRootFile = "flake.nix";
             programs = {
@@ -71,9 +84,11 @@
             test-overlay = pkgs.testers.runNixOSTest ./examples/overlay.nix;
             test-ping = pkgs.testers.runNixOSTest ./examples/ping.nix;
             test-cuda-nvidia = addRequiredFeatures [ "cuda" ] (
-              pkgs.testers.runNixOSTest ./examples/cuda/nvidia.nix
+              cudaPkgs.testers.runNixOSTest ./examples/cuda/nvidia.nix
             );
-            test-cuda-amd = addRequiredFeatures [ "cuda" ] (pkgs.testers.runNixOSTest ./examples/cuda/amd.nix);
+            test-cuda-amd = addRequiredFeatures [ "cuda" ] (
+              cudaPkgs.testers.runNixOSTest ./examples/cuda/amd.nix
+            );
           };
 
           devShells.default = pkgs.mkShell {
@@ -82,22 +97,18 @@
             ];
           };
 
-          checks = config.packages // {
+          checks = {
             formatting = treefmtEval.config.build.check inputs.self;
-          };
-
-          # necessary minimum to run the CUDA examples
-          _module.args.pkgs = import inputs.nixpkgs {
-            inherit system;
-            overlays = [
-              (import ./examples/cuda/overlay.nix)
-            ];
-            config = {
-              allowUnfree = true;
-              cudaSupport = true;
-              cudaForwardCompat = false;
-              cudaCapabilities = [ "6.1" ];
-            };
+            # not including the cuda tests because they won't
+            # run everywhere
+            inherit (config.packages)
+              test-browser
+              test-echo
+              test-minimal
+              test-multi-network
+              test-overlay
+              test-ping
+              ;
           };
         };
     };
