@@ -7,7 +7,7 @@
 
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    mkdocs-flake.url = "github:applicative-systems/mkdocs-flake/click";
+    mkdocs-flake.url = "github:applicative-systems/mkdocs-flake";
 
     treefmt-nix.url = "github:numtide/treefmt-nix";
     treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
