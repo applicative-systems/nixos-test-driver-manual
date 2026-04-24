@@ -1,6 +1,6 @@
 ## 2026-04
 
-### [PR #512733: nixos-test-driver: unbreak eval on macOS](https://github.com/NixOS/nixpkgs/pull/512733)
+### [PR #512733 — unbreak eval on macOS](https://github.com/NixOS/nixpkgs/pull/512733)
 
 !!! bug "Bugfix: restore evaluation of NixOS tests on macOS."
 
@@ -14,7 +14,7 @@ Typical error messages looked roughly like `error: Package 'vhost-device-vsock-.
 
 Contributors: [@tfc](https://github.com/tfc), [@vcunat](https://github.com/vcunat)
 
-### [PR #511413: nixos-test-driver: Add extra required features](https://github.com/NixOS/nixpkgs/pull/511413)
+### [PR #511413 — extra `requiredFeatures` options](https://github.com/NixOS/nixpkgs/pull/511413)
 
 !!! tip "New feature: declare extra required builder features and opt into the `/dev/net` sandbox check."
 
@@ -27,7 +27,7 @@ This is also interesting for anyone running **CUDA / GPU tests**: [see CUDA test
 
 Contributors: [@tfc](https://github.com/tfc)
 
-### [PR #511225: nixos-test-driver: fix handling of type-check-disabled case](https://github.com/NixOS/nixpkgs/pull/511225)
+### [PR #511225 — fix type-check-disabled case](https://github.com/NixOS/nixpkgs/pull/511225)
 
 !!! bug "Bugfix: restore tests that run with type-checking disabled."
 
@@ -35,7 +35,7 @@ Follow-up fix to [PR #510385](https://github.com/NixOS/nixpkgs/pull/510385) (the
 
 Contributors: [@mdaniels5757](https://github.com/mdaniels5757)
 
-### [PR #510385: nixos-test-driver: use configuration file instead of scattered env vars](https://github.com/NixOS/nixpkgs/pull/510385)
+### [PR #510385 — JSON driver config file](https://github.com/NixOS/nixpkgs/pull/510385)
 
 !!! abstract "Maintenance: replace multiple env vars with a single JSON driver config file."
 
@@ -45,7 +45,7 @@ As a side benefit, the resolved configuration is now inspectable via `test.drive
 
 Contributors: [@tfc](https://github.com/tfc)
 
-### [PR #510559: nixos-test-driver: don't prepare sandbox environment outside of sandbox.](https://github.com/NixOS/nixpkgs/pull/510559)
+### [PR #510559 — skip sandbox prep outside sandbox](https://github.com/NixOS/nixpkgs/pull/510559)
 
 !!! bug "Bugfix: don't run sandbox-setup code when the driver runs outside the sandbox."
 
@@ -55,19 +55,19 @@ Typical error messages look roughly like `mount: permission denied`, `mount: /ru
 
 Contributors: [@tfc](https://github.com/tfc)
 
-### [PR #510699: nixos/test-driver: add remaining tests to passthru.tests](https://github.com/NixOS/nixpkgs/pull/510699)
+### [PR #510699 — add remaining `passthru.tests`](https://github.com/NixOS/nixpkgs/pull/510699)
 
 !!! abstract "Maintenance: wire the remaining internal driver tests into `passthru.tests` so CI runs them on every driver change."
 
 Contributors: [@m1-s](https://github.com/m1-s)
 
-### [PR #510561: Nixos test driver tidy up](https://github.com/NixOS/nixpkgs/pull/510561)
+### [PR #510561 — driver tidy-up](https://github.com/NixOS/nixpkgs/pull/510561)
 
 !!! abstract "Maintenance: drop an unused `SENTINEL` object and stop documenting `_`-prefixed internal methods."
 
 Contributors: [@tfc](https://github.com/tfc), [@m1-s](https://github.com/m1-s)
 
-### [PR #509488: nixos/test-driver: Hide vde switch log messages](https://github.com/NixOS/nixpkgs/pull/509488)
+### [PR #509488 — hide VDE switch log noise](https://github.com/NixOS/nixpkgs/pull/509488)
 
 !!! tip "New feature: suppress noisy VDE switch log output from test runs."
 
@@ -77,7 +77,7 @@ Interesting for anyone who reads test logs — less noise, easier to find real i
 
 Contributors: [@m1-s](https://github.com/m1-s)
 
-### [PR #453305: nixos/test-driver: use vhost-device-vsock for SSH backdoor](https://github.com/NixOS/nixpkgs/pull/453305)
+### [PR #453305 — `vhost-device-vsock` SSH backdoor](https://github.com/NixOS/nixpkgs/pull/453305)
 
 !!! tip "New feature: SSH backdoor via `vhost-device-vsock` — no more `/dev/vhost-vsock` in `sandbox-paths`, no more CID conflicts."
 
@@ -92,7 +92,7 @@ Interesting for everyone using `sshBackdoor.enable = true;` and/or `enableDebugH
 
 Contributors: [@Ma27](https://github.com/Ma27)
 
-### [PR #509553: nixos/test-driver: add option to force kvm use](https://github.com/NixOS/nixpkgs/pull/509553)
+### [PR #509553 — `qemu.forceAccel` option](https://github.com/NixOS/nixpkgs/pull/509553)
 
 !!! tip "New feature: `qemu.forceAccel` fails fast when KVM/HVF is unavailable instead of silently falling back to slow TCG."
 
@@ -110,7 +110,7 @@ See also the [testing host setup chapter](setup.md).
 
 Contributors: [@m1-s](https://github.com/m1-s), [@tfc](https://github.com/tfc)
 
-### [PR #509867: nixos/test-driver: use log levels](https://github.com/NixOS/nixpkgs/pull/509867)
+### [PR #509867 — driver log levels](https://github.com/NixOS/nixpkgs/pull/509867)
 
 !!! tip "New feature: proper log levels in the test driver's Python logger."
 
@@ -122,7 +122,7 @@ See the new [Driver log levels](features/log-levels.md) feature page.
 
 Contributors: [@m1-s](https://github.com/m1-s)
 
-### [PR #504626: nixos/test-driver: fix create_machine return type](https://github.com/NixOS/nixpkgs/pull/504626)
+### [PR #504626 — fix `create_machine()` return type](https://github.com/NixOS/nixpkgs/pull/504626)
 
 !!! bug "Bugfix: `create_machine()` return type now correctly annotated as `QemuMachine`."
 
@@ -132,7 +132,7 @@ Contributors: [@alyssais](https://github.com/alyssais)
 
 ## 2026-03
 
-### [PR #503686: nixos-test-driver: Make overridable](https://github.com/NixOS/nixpkgs/pull/503686)
+### [PR #503686 — driver is overridable](https://github.com/NixOS/nixpkgs/pull/503686)
 
 !!! tip "New feature: the Python test driver is now a proper package (`pkgs.nixos-test-driver`) that can be overridden via overlays."
 
@@ -144,7 +144,7 @@ See the [Overriding the test driver itself](tutorials/applying-overlays.md#overr
 
 Contributors: [@tfc](https://github.com/tfc)
 
-### [PR #503070: nixos/test-driver: fix testScript regressions](https://github.com/NixOS/nixpkgs/pull/503070)
+### [PR #503070 — fix `testScript` regressions](https://github.com/NixOS/nixpkgs/pull/503070)
 
 !!! bug "Bugfix: restore `testScript` linting and expose a generic `machines` variable after the nspawn refactor."
 
@@ -152,7 +152,7 @@ Cleanup of regressions introduced by [the big nspawn PR #478109](https://github.
 
 Contributors: [@kmein](https://github.com/kmein)
 
-### [PR #501599: nixos/testing: fix testScript eval for functions without elipsis](https://github.com/NixOS/nixpkgs/pull/501599)
+### [PR #501599 — fix `testScript` without ellipsis](https://github.com/NixOS/nixpkgs/pull/501599)
 
 !!! bug "Bugfix: restore `testScript = { nodes }: ...` (strict pattern match without `...`) which broke after the nspawn PR added a `containers` argument."
 
@@ -160,7 +160,7 @@ The nspawn PR added a `containers` argument to the `testScript` function caller.
 
 Contributors: [@Mic92](https://github.com/Mic92)
 
-### [PR #501294: nixos/test-driver: fix type hints in extract-docstrings](https://github.com/NixOS/nixpkgs/pull/501294)
+### [PR #501294 — fix `extract-docstrings` types](https://github.com/NixOS/nixpkgs/pull/501294)
 
 !!! bug "Bugfix: correct type annotations in the docstring-extraction script after the nspawn refactor."
 
@@ -170,7 +170,7 @@ Typical error messages look roughly like a manual build failure with `mypy: erro
 
 Contributors: [@kmein](https://github.com/kmein)
 
-### [PR #479968: nixos/doc: document systemd-nspawn test containers](https://github.com/NixOS/nixpkgs/pull/479968)
+### [PR #479968 — document nspawn in NixOS manual](https://github.com/NixOS/nixpkgs/pull/479968)
 
 !!! tip "New feature: upstream NixOS manual now documents the systemd-nspawn test backend."
 
@@ -180,7 +180,7 @@ This is the **upstream** equivalent of what this manual covers in [Features: Con
 
 Contributors: [@kmein](https://github.com/kmein)
 
-### [PR #478109: nixos/test-driver: add support for nspawn containers](https://github.com/NixOS/nixpkgs/pull/478109)
+### [PR #478109 — nspawn container backend](https://github.com/NixOS/nixpkgs/pull/478109)
 
 !!! tip "New feature: systemd-nspawn as a second machine backend alongside QEMU — ~25% faster, no bare-metal required, enables GPU/device bind-mounts."
 
@@ -211,7 +211,7 @@ Contributors: [@kmein](https://github.com/kmein), [@jfly](https://github.com/jfl
 
 ## 2026-02
 
-### [PR #487754: nixos/test-driver: Add required attributes to package call](https://github.com/NixOS/nixpkgs/pull/487754)
+### [PR #487754 — fix `nix-shell` for driver](https://github.com/NixOS/nixpkgs/pull/487754)
 
 !!! bug "Bugfix: `nix-shell` now works in `nixpkgs/nixos/lib/test-driver` again."
 
@@ -231,7 +231,7 @@ Contributors: [@l0b0](https://github.com/l0b0), [@tfc](https://github.com/tfc)
 
 ## 2026-01
 
-### [PR #470248: nixos/nspawn-container: init a new nspawn-container profile](https://github.com/NixOS/nixpkgs/pull/470248)
+### [PR #470248 — `nspawn-container` profile](https://github.com/NixOS/nixpkgs/pull/470248)
 
 !!! tip "New feature: standalone `nspawn-container` NixOS profile — the foundation for container-based tests."
 
