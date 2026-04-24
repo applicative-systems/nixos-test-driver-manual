@@ -21,7 +21,7 @@ Contributors: [@tfc](https://github.com/tfc), [@vcunat](https://github.com/vcuna
 Adds a new option tree `requiredFeatures.*` on tests:
 
 - `requiredFeatures.cuda` — request arbitrary Nix builder features (`"cuda"` is just an example) so the builder selection routes the test to machines with GPUs.
-- `requiredFeatures.devnet` — If a test combines VMs with containers make it an error if the builder is not configured to provide the `"devnet"` feature string. This is to provide a better error message than leaving the user with VMs and containers that can't connect to each other. See also [Features: Container](features/container/) for more explanation.
+- `requiredFeatures.devnet` — If a test combines VMs with containers make it an error if the builder is not configured to provide the `"devnet"` feature string. This is to provide a better error message than leaving the user with VMs and containers that can't connect to each other. See also [Features: Container](features/container.md) for more explanation.
 
 This is also interesting for anyone running **CUDA / GPU tests**: [see CUDA test tutorial](tutorials/cuda-tests.md).
 
