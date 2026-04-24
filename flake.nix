@@ -53,14 +53,6 @@
               statix.enable = true;
             };
           };
-
-          # in the future, this should not be necessary as reqs should be
-          # communicated from within the test.
-          addRequiredFeatures =
-            reqs: drv:
-            drv.overrideTestDerivation (old: {
-              requiredSystemFeatures = old.requiredSystemFeatures ++ reqs;
-            });
         in
         {
           documentation = {
@@ -81,12 +73,8 @@
             test-multi-network = pkgs.testers.runNixOSTest ./examples/multi-network.nix;
             test-overlay = pkgs.testers.runNixOSTest ./examples/overlay.nix;
             test-ping = pkgs.testers.runNixOSTest ./examples/ping.nix;
-            test-cuda-nvidia = addRequiredFeatures [ "cuda" ] (
-              cudaPkgs.testers.runNixOSTest ./examples/cuda/nvidia.nix
-            );
-            test-cuda-amd = addRequiredFeatures [ "cuda" ] (
-              cudaPkgs.testers.runNixOSTest ./examples/cuda/amd.nix
-            );
+            test-cuda-nvidia = cudaPkgs.testers.runNixOSTest ./examples/cuda/nvidia.nix;
+            test-cuda-amd = cudaPkgs.testers.runNixOSTest ./examples/cuda/amd.nix;
           };
 
           devShells.default = pkgs.mkShell {

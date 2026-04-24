@@ -1,6 +1,8 @@
 {
   name = "saxpy-cuda-test";
 
+  requiredFeatures.cuda = true;
+
   containers.container = # (1)
     { pkgs, ... }:
     {
