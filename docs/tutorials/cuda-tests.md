@@ -37,23 +37,36 @@ The common part is in [`cuda/generic.nix`](https://github.com/applicative-system
 --8<-- "examples/cuda/generic.nix"
 ```
 
-1.  **Container support**
+1.  **CUDA builder support**
+
+    We must signalize to the nix build scheduling that we require a machine
+    with CUDA support.
+
+    This is the client-side counter part to the [host configuration](#host-configuration) section below.
+
+2.  **Container support**
 
     CUDA can at this point only be tested in the test driver's containers.
 
     It is generally possible to provide direct access to the GPU via PCI-passthrough.
     This would however make GPU access exclusive to the test machine.
 
-2.  We install `saxpy` into the container
+3.  We install `saxpy` into the container
 
-3.  **Extra container paths**
+4.  **Extra container paths**
 
     The Nix daemon already added these paths into the Nix sandbox (see [host configuration](#host-configuration)).
     From here, we need to pass these paths another time from inside the Nix sandbox further into the new systemd-nspawn container.
 
-4.  The test simply runs `saxpy`.
+5.  The test simply runs `saxpy`.
 
     If this does not crash, we know that CUDA generally works.
+
+??? example "The `requiredFeatures` test attribute has just been upstreamed"
+
+    If the attribute `requiredFeatures.cuda` doesn't exist in your NixOS version, please upgrade to the latest nixpkgs.
+
+    (This change was recently merged with [nixpkgs PR #511413: `nixos-test-driver: Add extra required features`](https://github.com/NixOS/nixpkgs/pull/511413))
 
 The `cuda/generic.nix` test module does not list all necessary paths, yet.
 In the `nvidia.nix` and `amd.nix` test modules, we include `generic.nix` to inherit all generic parts of the test and add the rest of the hardware specific paths:
@@ -126,7 +139,7 @@ On the host, the GPU driver must be configured properly, as well as the `nix-req
       # === sandbox settings ====
       programs.nix-required-mounts = {
         enable = true;
-        presets.nvidia-gpu.enable = true;
+        presets.nvidia-gpu.enable = true; # (1)
       };
 
       # === General GPU/NVIDIA NixOS settings ===
@@ -149,6 +162,8 @@ On the host, the GPU driver must be configured properly, as well as the `nix-req
     }
     ```
 
+    1.  This entry sets the `"cuda"` feature in the builder as requested by the test in `requiredFeatures.cuda = true;`
+
 === "AMD"
 
     Hosts with AMD GPUs need [ZLUDA](https://github.com/vosen/ZLUDA) support and can then run the test out of the box.
@@ -164,7 +179,7 @@ On the host, the GPU driver must be configured properly, as well as the `nix-req
       # === sandbox settings ===
       programs.nix-required-mounts = {
         enable = true;
-        presets.zluda.enable = true;
+        presets.zluda.enable = true; # (1)
       };
 
       # === General GPU/AMD NixOS settings ===
@@ -172,6 +187,8 @@ On the host, the GPU driver must be configured properly, as well as the `nix-req
       hardware.amdgpu.zluda.enable = true;
     }
     ```
+
+    1.  This entry sets the `"cuda"` feature in the builder as requested by the test in `requiredFeatures.cuda = true;`
 
 Make sure to rebuild your NixOS configuration with these settings.
 
@@ -191,16 +208,6 @@ The mentioned patch contains these Python lines:
 --8<-- "examples/cuda/nixos-test-driver-gpu.patch"
 ```
 
-Finally, the test derivation needs to communicate to the Nix daemon that it needs CUDA capabilities:
+For the [runnable example in this repository](https://github.com/applicative-systems/nixos-test-driver-manual/tree/main/examples/cuda), the `flake.nix` performs the overlay injection like this:
 
-```nix title="run-test.nix"
-cuda-test = (pkgs.testers.runNixOSTest ./cuda-test.nix).overrideTestDerivation (old: {
-    requiredSystemFeatures = old.requiredSystemFeatures ++ [ "cuda" ];
-});
-```
-
-For the [runnable example in this repository](https://github.com/applicative-systems/nixos-test-driver-manual/tree/main/examples/cuda), the `flake.nix` performs these changes like this:
-
-1. [overlay injection](https://github.com/applicative-systems/nixos-test-driver-manual/blob/main/flake.nix#L86)
-2. [definition of `addRequiredFeatures` helper](https://github.com/applicative-systems/nixos-test-driver-manual/blob/main/flake.nix#L48)
-3. [CUDA capability requirement injection](https://github.com/applicative-systems/nixos-test-driver-manual/blob/main/flake.nix#L66).
+-  [overlay injection](https://github.com/applicative-systems/nixos-test-driver-manual/blob/main/flake.nix#L38)
