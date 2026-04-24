@@ -130,7 +130,6 @@ Type-annotation fix: `create_machine()` always returns a `QemuMachine`, but the 
 
 Contributors: [@alyssais](https://github.com/alyssais)
 
-
 ## 2026-03
 
 ### [PR #503686: nixos-test-driver: Make overridable](https://github.com/NixOS/nixpkgs/pull/503686)
@@ -177,7 +176,7 @@ Contributors: [@kmein](https://github.com/kmein)
 
 Adds/restructures the upstream NixOS manual section for systemd-nspawn test containers: when to choose containers vs VMs, host setup (`auto-allocate-uids`, sandbox-paths), writing container tests, debugging them.
 
-This is the **upstream** equivalent of what this manual covers in [Features: Containers](features/container.md). 
+This is the **upstream** equivalent of what this manual covers in [Features: Containers](features/container.md).
 
 Contributors: [@kmein](https://github.com/kmein)
 
@@ -202,14 +201,13 @@ New things exposed to users:
 - `/etc/hosts` is now VLAN-aware
 - Limitations: no kernel tests, no setuid wrappers, no graphical tests, limited `/dev` access.
 
-Extensively documented in this manual (with references to [original NixOS manual](https://nixos.org/nixos/manual)): 
+Extensively documented in this manual (with references to [original NixOS manual](https://nixos.org/nixos/manual)):
 
-- [Testing host setup](setup.md). 
+- [Testing host setup](setup.md).
 - [Features: Containers](features/container.md)
 - [Tutorials: CUDA tests](tutorials/cuda-tests.md)
 
 Contributors: [@kmein](https://github.com/kmein), [@jfly](https://github.com/jfly), [@KiaraGrouwstra](https://github.com/KiaraGrouwstra), [@roberth](https://github.com/roberth)
-
 
 ## 2026-02
 
@@ -231,7 +229,6 @@ Only relevant to people hacking on the test driver itself (entering its dev shel
 
 Contributors: [@l0b0](https://github.com/l0b0), [@tfc](https://github.com/tfc)
 
-
 ## 2026-01
 
 ### [PR #470248: nixos/nspawn-container: init a new nspawn-container profile](https://github.com/NixOS/nixpkgs/pull/470248)
@@ -242,6 +239,6 @@ Adds the standalone `nspawn-container` NixOS profile (`${modulesPath}/virtualisa
 
 This is **the foundation** on which [PR #478109](https://github.com/NixOS/nixpkgs/pull/478109) was then built to enable container tests.
 
-Not documented *as a standalone profile* in this manual (we document its use via the test driver, not as a general-purpose NixOS profile). The profile is mostly internal plumbing.
+Not documented _as a standalone profile_ in this manual (we document its use via the test driver, not as a general-purpose NixOS profile). The profile is mostly internal plumbing.
 
 Contributors: [@jfly](https://github.com/jfly), [@kmein](https://github.com/kmein), [@arianvp](https://github.com/arianvp)

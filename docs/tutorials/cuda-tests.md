@@ -210,4 +210,4 @@ The mentioned patch contains these Python lines:
 
 For the [runnable example in this repository](https://github.com/applicative-systems/nixos-test-driver-manual/tree/main/examples/cuda), the `flake.nix` performs the overlay injection like this:
 
--  [overlay injection](https://github.com/applicative-systems/nixos-test-driver-manual/blob/main/flake.nix#L38)
+- [overlay injection](https://github.com/applicative-systems/nixos-test-driver-manual/blob/main/flake.nix#L38)

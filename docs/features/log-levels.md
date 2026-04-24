@@ -9,17 +9,16 @@ During development that is useful, but in CI — or when you just want to see wh
 
     If the attribute `logLevel` doesn't exist in your NixOS version, please upgrade to the latest nixpkgs.
 
-
 ## Available Levels
 
 The driver distinguishes three levels.
 Each level includes itself and every more severe level above it:
 
-| Level     | Includes                       | Typical use                                      |
-| --------- | ------------------------------ | ------------------------------------------------ |
-| `info`    | `info`, `warning`, `error`     | Default. Good for local development.             |
-| `warning` | `warning`, `error`             | Quieter runs; hides routine progress messages.   |
-| `error`   | `error` only                   | Minimal output; only failure-relevant lines.     |
+| Level     | Includes                   | Typical use                                    |
+| --------- | -------------------------- | ---------------------------------------------- |
+| `info`    | `info`, `warning`, `error` | Default. Good for local development.           |
+| `warning` | `warning`, `error`         | Quieter runs; hides routine progress messages. |
+| `error`   | `error` only               | Minimal output; only failure-relevant lines.   |
 
 Serial console output from the VMs is controlled separately and is not affected by the log level.
 

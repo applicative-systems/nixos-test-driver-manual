@@ -56,7 +56,7 @@ nixpkgs.overlays is set to read-only
 
 ## Overriding the test driver itself
 
-So far, overlays have been applied to packages *inside the guest*.
+So far, overlays have been applied to packages _inside the guest_.
 An overlay can also replace the **test driver** itself — the Python program that orchestrates the VMs and containers and runs your `testScript`.
 This is useful when you need to patch driver behaviour for an experimental feature that is not yet upstream.
 
@@ -76,9 +76,9 @@ _: prev: {
 }
 ```
 
-Apply the overlay in the **host** `pkgs` (as the driver typically does not run inside the guests): 
+Apply the overlay in the **host** `pkgs` (as the driver typically does not run inside the guests):
 Add it to the `overlays` argument in your nixpkgs include.
-If you're using Nix flakes, this means that you need to re-import nixpkgs. 
+If you're using Nix flakes, this means that you need to re-import nixpkgs.
 See also the CUDA example:
 
 !!! tip "Patching the NixOS test driver to run CUDA tests"
