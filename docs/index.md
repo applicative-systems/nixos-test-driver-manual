@@ -61,6 +61,12 @@ Need a working example? Go to [Tutorials](./tutorials/index.md).
 
     Pick up patterns that make tests faster, clearer, and more reliable in CI.
 
+-   [:material-newspaper-variant-outline: **Changelog**](./changelog.md)
+
+    ---
+
+    A curated index of upstream `nixpkgs` PRs touching the test driver — bugfixes, new features, maintenance. Skim monthly to stay ahead.
+
 </div>
 
 <!-- prettier-ignore-end -->
@@ -116,6 +122,7 @@ This manual is maintained by the [Applicative Systems Group](https://applicative
 
 The Python test driver that became the standard implementation in `nixpkgs` was authored by [Jacek Galowicz](https://galowicz.de) ([`@tfc`](https://github.com/tfc)) together with collaborators and later adopted across the NixOS test suite.
 Since then, the ecosystem has continued to grow with further work such as container support and broader operational guidance.
+The [Changelog](./changelog.md) is the running record of that work — every upstream `nixpkgs` PR touching the driver, categorised and explained — and a good way to see the pace at which the driver keeps evolving.
 
 <!-- prettier-ignore-start -->
 
