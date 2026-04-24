@@ -109,6 +109,13 @@ Another extra setting is necessary to allow for network communicaton between VMs
 
     As this setting gives sandbox users access to `/dev/net`, this might impede sandbox security.
 
+    An improvement is currently [in the design phase](https://github.com/NixOS/nixpkgs/pull/512268).
+
+Two Nix-daemon settings are required together:
+
+1. `extra-sandbox-paths = /dev/net` — exposes the kernel's `/dev/net` into the sandbox so the bridge between the VMs and nspawn containers can be set up.
+2. `extra-system-features = devnet` — advertises the builder as supporting this capability.
+
 === "NixOS"
 
     On NixOS, add the following settings to the system configuration:
@@ -116,10 +123,18 @@ Another extra setting is necessary to allow for network communicaton between VMs
     ```nix title="configuration.nix"
     {
       nix.settings.extra-sandbox-paths = [
-        "/dev/net"
+        "/dev/net" # (1)
+      ];
+
+      nix.settings.extra-system-features = [
+        "devnet" # (2)
       ];
     }
     ```
+
+    1.  This entry adds `/dev/net` to the sandbox, which enables the driver to configure the virtual networks accordingly.
+
+    2.  This entry advertises the `"devnet"` feature in the builder, as requested by tests that set `requiredFeatures.devnet = true;` (the default when a test defines both VMs and containers).
 
     Make sure to rebuild your system, which restarts the Nix daemon with the new settings.
 
@@ -129,6 +144,7 @@ Another extra setting is necessary to allow for network communicaton between VMs
 
     ``` title="/etc/nix/nix.conf"
     extra-sandbox-paths = /dev/net
+    extra-system-features = devnet
     ```
 
     Make sure to reload the Nix daemon after applying these settings:
@@ -136,3 +152,31 @@ Another extra setting is necessary to allow for network communicaton between VMs
     ```console
     sudo systemctl restart nix-daemon.service
     ```
+
+#### Why the `devnet` feature?
+
+??? example "This feature has been recently upstreamed"
+
+    Since [PR #511413](https://github.com/NixOS/nixpkgs/pull/511413), a test that mixes VMs with containers requires the `"devnet"` system feature from its builder by default.
+
+    If the attribute `requiredFeatures.devnet` doesn't exist in your NixOS version, please upgrade to the latest nixpkgs.
+
+Without this, a misconfigured builder would silently produce a test where VMs and containers cannot see each other on the network — a confusing failure mode that is hard to diagnose.
+
+When the builder does not advertise `devnet`, the test now fails early with an error message like:
+
+```console
+error: a 'devnet' feature is required to build '/nix/store/...-vm-test-run-...drv', but the current machine does not provide it
+```
+
+If a particular test definitely does not need cross-network communication between VMs and containers (and you want to skip the extra sandbox configuration), opt out explicitly:
+
+```nix title="test.nix"
+{
+  name = "my-test";
+
+  requiredFeatures.devnet = false;
+
+  # ...
+}
+```

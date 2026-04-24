@@ -154,6 +154,7 @@ nav:
       - features/screenshots-and-ocr.md
       - features/linting.md
       - features/error-hook.md
+      - features/log-levels.md
   - Tutorials:
       - tutorials/index.md
       - tutorials/connecting-to-nodes-in-interactive.md
@@ -167,3 +168,5 @@ nav:
       - best-practices/service-race-conditions.md
       - best-practices/pkgs-attribute.md
       - best-practices/use-parallelism.md
+      - best-practices/force-kvm.md
+  - Changelog: changelog.md

@@ -54,6 +54,37 @@ nixpkgs.overlays is set to read-only
 
     As a clear majority of tests does not use overlays per node, this saves a lot of evaluation time.
 
+## Overriding the test driver itself
+
+So far, overlays have been applied to packages *inside the guest*.
+An overlay can also replace the **test driver** itself — the Python program that orchestrates the VMs and containers and runs your `testScript`.
+This is useful when you need to patch driver behaviour for an experimental feature that is not yet upstream.
+
+??? example "This feature has been recently upstreamed"
+
+    Since [PR #503686](https://github.com/NixOS/nixpkgs/pull/503686), the Python test driver is exposed as `pkgs.nixos-test-driver` and wired into tests via the module-system option `config.pythonTestDriverPackage`.
+
+    If `pkgs.nixos-test-driver` doesn't exist in your NixOS version, please upgrade to the latest nixpkgs.
+
+The mechanism is a standard Nixpkgs overlay that calls `overrideAttrs` on the `nixos-test-driver` derivation — for example, to add a patch:
+
+```nix title="driver-overlay.nix"
+_: prev: {
+  nixos-test-driver = prev.nixos-test-driver.overrideAttrs (old: {
+    patches = old.patches or [ ] ++ [ ./my-driver.patch ];
+  });
+}
+```
+
+Apply the overlay in the **host** `pkgs` (as the driver typically does not run inside the guests): 
+Add it to the `overlays` argument in your nixpkgs include.
+If you're using Nix flakes, this means that you need to re-import nixpkgs. 
+See also the CUDA example:
+
+!!! tip "Patching the NixOS test driver to run CUDA tests"
+
+    The [CUDA tutorial](cuda-tests.md#test-driver-patch) uses exactly this pattern to give nspawn containers access to the host's `/run` directory — a capability required for GPU driver access that is not yet upstream.
+
 ## Further references
 
 <!-- prettier-ignore-start -->

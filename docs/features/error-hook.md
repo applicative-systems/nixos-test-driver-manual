@@ -35,18 +35,23 @@ Please also refer to the [NixOS manual section about the debug hook](https://nix
 }
 ```
 
-To make SSH access via [VSOCK](https://man7.org/linux/man-pages/man7/vsock.7.html) available inside the sandbox, the test build must expose `/dev/vhost-vsock`:
+??? tip "New improvements regarding the VSOCK interface"
+
+    The SSH backdoor now uses [`vhost-device-vsock`](https://github.com/rust-vmm/vhost-device/blob/main/vhost-device-vsock/README.md), which talks [AF_VSOCK](https://man7.org/linux/man-pages/man7/vsock.7.html) to the guest but terminates on a UNIX domain socket on the host.
+    No extra `--option sandbox-paths /dev/vhost-vsock` is needed any longer, and untrusted users can debug sandboxed tests with the SSH backdoor.
+
+Simply run the test as usual:
 
 === "Flakes"
 
     ```console
-    nix build .#my-test --option sandbox-paths /dev/vhost-vsock
+    nix build .#my-test
     ```
 
 === "Non-Flakes"
 
     ```console
-    nix-build run-test.nix --option sandbox-paths /dev/vhost-vsock
+    nix-build run-test.nix
     ```
 
 Early in the build, the driver prints the SSH backdoor information, including the vsock addresses for the machines.
@@ -58,8 +63,8 @@ The output typically looks like this:
 # ...
 vm-test-run-test> SSH backdoor enabled, the machines can be accessed like this:
 vm-test-run-test> Note: vsocks require systemd-ssh-proxy(1) to be enabled (default on NixOS 25.05 and newer).
-vm-test-run-test>     machine1:  ssh -o User=root vsock/3
-vm-test-run-test>     machine2:  ssh -o User=root vsock/4
+vm-test-run-test>     machine1:  ssh -o User=root vsock-mux//build/tmpjaxpbq5p/machine1_host.socket
+vm-test-run-test>     machine2:  ssh -o User=root vsock-mux//build/tmpjaxpbq5p/machine2_host.socket
 # ...
 ```
 
@@ -81,7 +86,7 @@ vm-test-run-test> !!! Breakpoint reached, run 'sudo /nix/store/ksr4kryl9jl2rmgyh
 Once attached, you can connect to the VM with the generated SSH configuration:
 
 ```console
-ssh -F ./ssh_config root@vsock/3
+ssh -o User=root vsock-mux//build/tmpjaxpbq5p/machine2_host.socket
 ```
 
 You can also connect to the paused test driver with:

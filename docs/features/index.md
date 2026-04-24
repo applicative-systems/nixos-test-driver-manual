@@ -54,6 +54,12 @@ The NixOS integration test driver is a powerful tool with many advanced features
 
     Can't reproduce rare flaky test failures? Hook into the test sandbox when it happens!
 
+-   [:material-console-line: **Driver log levels**](./log-levels.md)
+
+    ---
+
+    Control how verbose the driver output is — useful for cleaner CI logs.
+
 </div>
 
 <!-- prettier-ignore-end -->

@@ -85,6 +85,38 @@ Check your KVM configuration:
    ```
    In this configuration, anyone has write-access to `/dev/kvm`, which is the simplest configuration method.
 
+### Fail tests early if KVM is missing
+
+When QEMU cannot access KVM (on Linux) or [HVF](https://wiki.qemu.org/Features/HVF) (on macOS), it transparently falls back to the [TCG](https://www.qemu.org/docs/master/devel/index-tcg.html) interpreter.
+Tests still run, but roughly an order of magnitude slower.
+The fallback is only reported as a QEMU log line buried in the test output, so it is easy to miss.
+Suddenly-slow tests are often explained by a host reconfiguration that silently revoked access to `/dev/kvm`.
+
+Setting `qemu.forceAccel = true;` turns this into an early, explicit failure:
+
+```nix title="test.nix"
+{
+  name = "my-test";
+
+  qemu.forceAccel = true;
+
+  nodes.machine = { };
+
+  testScript = ''
+    start_all()
+  '';
+}
+```
+
+If the required accelerator is not available, the test aborts with a message like:
+
+```console
+forceAccel is enabled but /dev/kvm is not accessible (permission denied).
+Check that your user is in the 'kvm' group or that /dev/kvm has the correct permissions.
+```
+
+This is especially useful in CI, where a silent fallback to TCG can make tests slow enough to hit timeouts for reasons unrelated to the code under test.
+
 ## :fontawesome-solid-apple-alt: macOS setup
 
 NixOS integration tests can run on macOS (Apple Silicon) by using a Linux builder or the `apple-virt` virtualization framework.

@@ -30,6 +30,12 @@ These guides collect operational advice for writing NixOS tests that are fast to
 
     Keep host packages and guest packages separate so tests stay portable.
 
+-   [:octicons-stack-16: **Fail fast when KVM is unavailable**](./force-kvm.md)
+
+    ---
+
+    Use `qemu.forceAccel` to turn silent TCG fallback into an explicit test failure.
+
 </div>
 
 <!-- prettier-ignore-end -->
