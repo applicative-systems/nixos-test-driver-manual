@@ -1,3 +1,8 @@
+# Changelog
+
+A curated index of upstream nixpkgs PRs that touched the NixOS test driver, so you don't have to watch the PR firehose yourself.
+Entries are grouped by month and tagged as **bugfix**, **new feature** (with pointers into the relevant section of this manual), or **maintenance** (brief by design).
+
 ## 2026-04
 
 ### [PR #512733 — unbreak eval on macOS](https://github.com/NixOS/nixpkgs/pull/512733)
