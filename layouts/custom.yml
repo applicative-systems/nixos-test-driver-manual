@@ -1,0 +1,54 @@
+size: { width: 1200, height: 630 }
+
+layers:
+  # Solid dark background
+  - background:
+      color: "#10141f"
+
+  # Lego-box hero image on the left
+  - background:
+      image: layouts/test-driver-elco.webp
+    size: { width: 540, height: 540 }
+    offset: { x: 45, y: 45 }
+
+  # Thin accent stripe separating the hero image from the text column
+  - background:
+      color: "#3b82f6"
+    size: { width: 4, height: 460 }
+    offset: { x: 605, y: 85 }
+
+  # Page title
+  - size: { width: 510, height: 250 }
+    offset: { x: 640, y: 80 }
+    typography:
+      content: "{{ page.meta.get('title', page.title) }}"
+      align: start
+      color: white
+      overflow: shrink
+      line:
+        amount: 4
+        height: 1.2
+      font:
+        family: Raleway
+        style: Bold
+
+  # Page description (falls back to the site description)
+  - size: { width: 510, height: 130 }
+    offset: { x: 640, y: 345 }
+    typography:
+      content: "{{ page.meta.get('description', config.site_description) }}"
+      align: start
+      color: "#aab2c9"
+      overflow: shrink
+      line:
+        amount: 5
+        height: 1.3
+      font:
+        family: Raleway
+        style: Regular
+
+  # Applicative Systems wordmark, bottom right
+  - background:
+      image: layouts/applicative-systems-rounded-white.png
+    size: { width: 230, height: 120 }
+    offset: { x: 920, y: 490 }

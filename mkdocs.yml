@@ -13,6 +13,8 @@ plugins:
   - search
   - tags
   - social:
+      cards_layout_dir: layouts
+      cards_layout: custom
       cards_layout_options:
         font_family: Raleway
 
