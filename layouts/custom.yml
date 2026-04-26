@@ -1,5 +1,29 @@
 size: { width: 1200, height: 630 }
 
+definitions:
+  - &page_title >-
+    {{ page.meta.get("title", page.title) }}
+  - &page_description >-
+    {{ page.meta.get("description", config.site_description) }}
+
+# Meta tags injected into <head> for link-preview consumers
+# (Slack, Discord, X/Twitter, LinkedIn, Facebook, iMessage, ...).
+# Custom layouts must declare these explicitly — only the built-in
+# `default` layout sets them automatically.
+tags:
+  og:type: website
+  og:title: *page_title
+  og:description: *page_description
+  og:image: "{{ image.url }}"
+  og:image:type: "{{ image.type }}"
+  og:image:width: "{{ image.width }}"
+  og:image:height: "{{ image.height }}"
+  og:url: "{{ page.canonical_url }}"
+  twitter:card: summary_large_image
+  twitter:title: *page_title
+  twitter:description: *page_description
+  twitter:image: "{{ image.url }}"
+
 layers:
   # Solid dark background
   - background:
