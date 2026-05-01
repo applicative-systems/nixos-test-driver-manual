@@ -70,13 +70,14 @@
 
           packages = {
             test-browser = pkgs.testers.runNixOSTest ./examples/browser.nix;
+            test-cuda-amd = cudaPkgs.testers.runNixOSTest ./examples/cuda/amd.nix;
+            test-cuda-nvidia = cudaPkgs.testers.runNixOSTest ./examples/cuda/nvidia.nix;
             test-echo = pkgs.testers.runNixOSTest ./examples/echo;
             test-minimal = pkgs.testers.runNixOSTest ./examples/minimal.nix;
             test-multi-network = pkgs.testers.runNixOSTest ./examples/multi-network.nix;
             test-overlay = pkgs.testers.runNixOSTest ./examples/overlay.nix;
             test-ping = pkgs.testers.runNixOSTest ./examples/ping.nix;
-            test-cuda-nvidia = cudaPkgs.testers.runNixOSTest ./examples/cuda/nvidia.nix;
-            test-cuda-amd = cudaPkgs.testers.runNixOSTest ./examples/cuda/amd.nix;
+            test-python-package = pkgs.testers.runNixOSTest ./examples/python-package;
           };
 
           devShells.default = pkgs.mkShell {
@@ -96,6 +97,7 @@
               test-multi-network
               test-overlay
               test-ping
+              test-python-package
               ;
           };
         };
