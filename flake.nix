@@ -86,6 +86,19 @@
             ];
           };
 
+          # Dev shell for hacking on examples/python-package/usertest in an
+          # IDE. It provides a Python interpreter that already has
+          # `nixos-test-driver` (and therefore `test_driver`) on its
+          # `sys.path`, plus ty for in-editor type checking.
+          devShells.usertest = pkgs.mkShell {
+            packages = [
+              pkgs.ty
+              (pkgs.python3.withPackages (p: [
+                p.nixos-test-driver
+              ]))
+            ];
+          };
+
           checks = {
             formatting = treefmtEval.config.build.check inputs.self;
             # not including the cuda tests because they won't

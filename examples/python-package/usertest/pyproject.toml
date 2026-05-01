@@ -7,9 +7,23 @@ name = "usertest"
 version = "0.1.0"
 description = "Reusable NixOS test driver helpers"
 requires-python = ">=3.11"
+dependencies = [
+  "nixos-test-driver",
+]
+
+[project.optional-dependencies]
+dev = [
+  "ty",
+]
 
 [tool.setuptools.packages.find]
 where = ["src"]
 
 [tool.setuptools.package-data]
 usertest = ["py.typed"]
+
+[tool.ty.src]
+include = ["src/usertest"]
+
+[tool.ty.rules]
+unresolved-import = "error"
