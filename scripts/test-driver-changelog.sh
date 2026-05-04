@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-SINCE="2026-01-01"
+SINCE="2026-04-01"
 UNTIL="2027-01-01"
 PATHS=(nixos/lib/test-driver nixos/lib/testing)
 OUTPUT="test-driver-changelog.md"
