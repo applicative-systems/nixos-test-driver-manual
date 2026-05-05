@@ -3,7 +3,47 @@
 A curated index of upstream nixpkgs PRs that touched the NixOS test driver, so you don't have to watch the PR firehose yourself.
 Entries are grouped by month and tagged as **bugfix**, **new feature** (with pointers into the relevant section of this manual), or **maintenance** (brief by design).
 
+## 2026-05
+
+### [PR #509615 — `ty` and `ruff` for test scripts](https://github.com/NixOS/nixpkgs/pull/509615)
+
+!!! abstract "Maintenance: typechecking and linting of `testScript` now use `ty` and `ruff` instead of `mypy` and `pyflakes`."
+
+The [Astral toolchain](https://docs.astral.sh/) (`ty` for typechecking, `ruff` for linting) replaces `mypy` and `pyflakes` when checking the Python `testScript` of a NixOS test. The new tools are much faster but produce different — and in some cases stricter — diagnostics, so existing tests may surface new warnings.
+
+Only the test script is migrated in this PR; switching the driver itself is tracked separately in [PR #509654](#pr-509654-ty-for-the-driver-itself).
+
+Contributors: [@tfc](https://github.com/tfc)
+
+### [PR #511859 — deprecate `machine` for single-node tests](https://github.com/NixOS/nixpkgs/pull/511859)
+
+!!! abstract "Deprecation: referring to the only node of a test as `machine` (when the node is named differently) now emits a warning and will be removed."
+
+Tests of the form
+
+```nix
+runTest {
+  nodes.foo = { /* ... */ };
+  testScript = ''
+    machine.start()
+    # ...
+  '';
+}
+```
+
+— where the only node is named `foo` but the `testScript` refers to it as `machine` — now print a deprecation warning. The behaviour is scheduled for removal in a future release. Use the actual node name (e.g. `foo.start()`) instead.
+
+Contributors: [@Ma27](https://github.com/Ma27)
+
 ## 2026-04
+
+### [PR #512730 — don't assert on `vhost_vsock`](https://github.com/NixOS/nixpkgs/pull/512730)
+
+!!! bug "Bugfix: don't assert on `vhost_vsock` for interactive tests that have only containers and no VMs."
+
+Follow-up to the macOS / vsock work in [PR #512733](#pr-512733-unbreak-eval-on-macos): an assertion on `vhost_vsock` fired in `driverInteractive` for tests that contain only nspawn containers (no QEMU VMs).
+
+Contributors: [@tfc](https://github.com/tfc)
 
 ### [PR #512733 — unbreak eval on macOS](https://github.com/NixOS/nixpkgs/pull/512733)
 
@@ -18,6 +58,14 @@ Eval on macOS (`darwin`) broke because the driver pulled in Linux-only dependenc
 Typical error messages looked roughly like `error: Package 'vhost-device-vsock-...' is not available on the requested hostPlatform`, or `attribute 'vhost-device-vsock' missing` while evaluating a NixOS test on `aarch64-darwin` / `x86_64-darwin`.
 
 Contributors: [@tfc](https://github.com/tfc), [@vcunat](https://github.com/vcunat)
+
+### [PR #511896 — fix `driverInteractive` test_script invocation](https://github.com/NixOS/nixpkgs/pull/511896)
+
+!!! bug "Bugfix: restore `test_script` invocation in `driverInteractive` after the JSON-config refactor."
+
+Follow-up to [PR #510385](#pr-510385-json-driver-config-file) (the JSON driver config-file refactor): a small regression in how the interactive driver passed the test script was corrected.
+
+Contributors: [@Ma27](https://github.com/Ma27)
 
 ### [PR #511413 — extra `requiredFeatures` options](https://github.com/NixOS/nixpkgs/pull/511413)
 
@@ -36,7 +84,7 @@ Contributors: [@tfc](https://github.com/tfc)
 
 !!! bug "Bugfix: restore tests that run with type-checking disabled."
 
-Follow-up fix to [PR #510385](https://github.com/NixOS/nixpkgs/pull/510385) (the config-file refactor). The branch that handled tests with type-checking disabled was broken, causing some Hydra failures.
+Follow-up fix to [PR #510385](#pr-510385-json-driver-config-file) (the config-file refactor). The branch that handled tests with type-checking disabled was broken, causing some Hydra failures.
 
 Contributors: [@mdaniels5757](https://github.com/mdaniels5757)
 
@@ -114,6 +162,14 @@ Interesting for anyone who want tests to fail instead of getting mysteriously sl
 See also the [testing host setup chapter](setup.md).
 
 Contributors: [@m1-s](https://github.com/m1-s), [@tfc](https://github.com/tfc)
+
+### [PR #509654 — `ty` for the driver itself](https://github.com/NixOS/nixpkgs/pull/509654)
+
+!!! abstract "Maintenance: typechecking of the test driver package switches from `mypy` to `ty`."
+
+Sister change to [PR #509615](#pr-509615-ty-and-ruff-for-test-scripts), which migrated the `testScript` side. This PR migrates the **test driver package itself** to [`ty`](https://docs.astral.sh/), so internal driver development and packaging now use the same Astral toolchain. No user-visible behaviour change for test authors — only relevant when hacking on the driver.
+
+Contributors: [@tfc](https://github.com/tfc)
 
 ### [PR #509867 — driver log levels](https://github.com/NixOS/nixpkgs/pull/509867)
 
@@ -242,7 +298,7 @@ Contributors: [@l0b0](https://github.com/l0b0), [@tfc](https://github.com/tfc)
 
 Adds the standalone `nspawn-container` NixOS profile (`${modulesPath}/virtualisation/nspawn-container`) that builds a runnable `run-<name>-nspawn` script — analogous to `qemu-vm.nix`. Shares networking options (`virtualisation.vlans`, `virtualisation.allInterfaces`) with `qemu-vm.nix` via a factored-out module.
 
-This is **the foundation** on which [PR #478109](https://github.com/NixOS/nixpkgs/pull/478109) was then built to enable container tests.
+This is **the foundation** on which [PR #478109](#pr-478109-nspawn-container-backend) was then built to enable container tests.
 
 Not documented _as a standalone profile_ in this manual (we document its use via the test driver, not as a general-purpose NixOS profile). The profile is mostly internal plumbing.
 
