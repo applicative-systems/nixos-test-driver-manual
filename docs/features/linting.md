@@ -30,8 +30,8 @@ This catches common mistakes early, before resources are wasted on failures that
 The `testScript` is Python code embedded in your test definition.
 When the test is built, the driver runs:
 
-- [Pyflakes](https://pypi.org/project/pyflakes/) to lint the script and catch common Python mistakes
-- [mypy](https://www.mypy-lang.org/) to type-check the script
+- [ruff](https://docs.astral.sh/ruff/) to lint the script and catch common Python mistakes
+- [ty](https://docs.astral.sh/ty/) to type-check the script
 
 This means syntax issues, undefined names, and many type-related mistakes are reported before the test itself starts running.
 
@@ -43,8 +43,8 @@ For rapid local iteration, the test options reference in the [NixOS manual](http
 {
   name = "my test";
 
-  skipLint = true;      # disables the Pyflakes check
-  skipTypeCheck = true; # disables the mypy check
+  skipLint = true;      # disables the ruff check
+  skipTypeCheck = true; # disables the ty check
 
   # ...
 }
