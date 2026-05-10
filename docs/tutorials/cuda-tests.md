@@ -77,11 +77,19 @@ In the `nvidia.nix` and `amd.nix` test modules, we include `generic.nix` to inhe
     --8<-- "examples/cuda/nvidia.nix"
     ```
 
+    1.  enable `nvidia-gpu` in addition to `cuda` (which is set in`generic.nix`)
+        as a required additional feature of the nix builder.
+        This way we can avoid running this test on CUDA enabled AMD machines.
+
 === "AMD"
 
     ```nix title="cuda/amd.nix"
     --8<-- "examples/cuda/amd.nix"
     ```
+
+    1.  enable `amd-gpu` in addition to `cuda` (which is set in`generic.nix`)
+        as a required additional feature of the nix builder.
+        This way we can avoid running this test on CUDA enabled NVIDIA machines.
 
 ??? question "Where to the bind mount paths come from?"
 
