@@ -1,6 +1,8 @@
 {
   imports = [ ./generic.nix ];
 
+  requiredFeatures.nvidia-gpu = true; # (1)
+
   containers.container = {
     virtualisation.systemd-nspawn.options = [
       "--bind=/dev/nvidia-modeset:/dev/nvidia-modeset"
