@@ -29,7 +29,7 @@ for branch in master staging-next staging; do
   fi
 done
 
-if (( ${#REFS[@]} == 0 )); then
+if ((${#REFS[@]} == 0)); then
   echo "Neither $REMOTE/master nor staging refs are available locally." >&2
   exit 1
 fi
@@ -38,11 +38,11 @@ echo "Collecting commits between $SINCE and $UNTIL across ${REFS[*]}..." >&2
 
 mapfile -t lines < <(
   git log "${REFS[@]}" --since="$SINCE" --until="$UNTIL" \
-    --format=$'%H\t%s' -- "${PATHS[@]}" \
-  | awk -F'\t' '!seen[$1]++'
+    --format=$'%H\t%s' -- "${PATHS[@]}" |
+    awk -F'\t' '!seen[$1]++'
 )
 
-if (( ${#lines[@]} == 0 )); then
+if ((${#lines[@]} == 0)); then
   echo "No commits found." >&2
   exit 0
 fi
@@ -72,7 +72,7 @@ for branch in staging-next staging; do
   fi
 done
 
-if (( ${#extra_refs[@]} > 0 )); then
+if ((${#extra_refs[@]} > 0)); then
   while IFS=$'\t' read -r sha subject; do
     [[ $subject =~ \(#([0-9]+)\)[[:space:]]*$ ]] || continue
     pr_num=${BASH_REMATCH[1]}
@@ -100,16 +100,16 @@ resolve_sha_batch() {
     i=$((i + 1))
   done
   q+='}}'
-  gh api graphql -f query="$q" \
-    | jq -c '.data.repository | to_entries[] | .value.associatedPullRequests.nodes[]?' \
-    >>"$tmp"
+  gh api graphql -f query="$q" |
+    jq -c '.data.repository | to_entries[] | .value.associatedPullRequests.nodes[]?' \
+      >>"$tmp"
 }
 
-if (( ${#unresolved[@]} > 0 )); then
+if ((${#unresolved[@]} > 0)); then
   i=0
-  while (( i < ${#unresolved[@]} )); do
-    end=$(( i + BATCH_SIZE ))
-    (( end > ${#unresolved[@]} )) && end=${#unresolved[@]}
+  while ((i < ${#unresolved[@]})); do
+    end=$((i + BATCH_SIZE))
+    ((end > ${#unresolved[@]})) && end=${#unresolved[@]}
     resolve_sha_batch "${unresolved[@]:i:end-i}"
     i=$end
   done
@@ -124,17 +124,17 @@ resolve_pr_batch() {
     i=$((i + 1))
   done
   q+='}}'
-  gh api graphql -f query="$q" \
-    | jq -c '.data.repository | to_entries[] | .value | select(. != null)' \
-    >>"$tmp"
+  gh api graphql -f query="$q" |
+    jq -c '.data.repository | to_entries[] | .value | select(. != null)' \
+      >>"$tmp"
 }
 
-if (( ${#inline_pr[@]} > 0 )); then
+if ((${#inline_pr[@]} > 0)); then
   inline_pr_list=("${!inline_pr[@]}")
   i=0
-  while (( i < ${#inline_pr_list[@]} )); do
-    end=$(( i + BATCH_SIZE ))
-    (( end > ${#inline_pr_list[@]} )) && end=${#inline_pr_list[@]}
+  while ((i < ${#inline_pr_list[@]})); do
+    end=$((i + BATCH_SIZE))
+    ((end > ${#inline_pr_list[@]})) && end=${#inline_pr_list[@]}
     resolve_pr_batch "${inline_pr_list[@]:i:end-i}"
     i=$end
   done
