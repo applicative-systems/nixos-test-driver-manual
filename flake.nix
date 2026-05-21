@@ -21,8 +21,10 @@
       ];
       systems = [
         "x86_64-linux"
-        "aarch64-linux"
-        "aarch64-darwin"
+        # disable these archs for now. everything should just work
+        # but we only have x86 CI right now anyway
+        #"aarch64-linux"
+        #"aarch64-darwin"
       ];
       perSystem =
         {
