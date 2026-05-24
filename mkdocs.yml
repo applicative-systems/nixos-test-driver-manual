@@ -164,6 +164,7 @@ nav:
       - tutorials/graphical-vm-tests.md
       - tutorials/applying-overlays.md
       - tutorials/cuda-tests.md
+      - tutorials/headscale-tailscale-mesh.md
   - Best Practices:
       - best-practices/index.md
       - best-practices/timeout.md

@@ -73,6 +73,7 @@
           packages = {
             test-browser = pkgs.testers.runNixOSTest ./examples/browser.nix;
             test-echo = pkgs.testers.runNixOSTest ./examples/echo;
+            test-headscale = pkgs.testers.runNixOSTest ./examples/headscale.nix;
             test-minimal = pkgs.testers.runNixOSTest ./examples/minimal.nix;
             test-multi-network = pkgs.testers.runNixOSTest ./examples/multi-network.nix;
             test-overlay = pkgs.testers.runNixOSTest ./examples/overlay.nix;
@@ -94,6 +95,7 @@
             inherit (config.packages)
               test-browser
               test-echo
+              test-headscale
               test-minimal
               test-multi-network
               test-overlay
