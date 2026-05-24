@@ -12,6 +12,7 @@ Discover example test use cases with some explanation how they work so you can a
 -   [:desktop: **Screenshots and OCR in graphical VMs**](./graphical-vm-tests.md)
 -   [:simple-nvidia: **Run CUDA apps in test containers**](./cuda-tests.md)
 -   [:loop: **Applying overlays in tests**](./applying-overlays.md)
+-   [:simple-tailscale: **Test a self-hosted mesh VPN with Headscale**](./headscale-tailscale-mesh.md)
 
 </div>
 
