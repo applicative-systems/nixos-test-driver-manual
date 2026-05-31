@@ -79,7 +79,7 @@ Build the interactive driver first:
 Then start it:
 
 ```console
-./result/bin/run-nixos-test
+./result/bin/nixos-test-driver
 ```
 
 Early in the startup output, the driver prints the SSH commands for all machines:

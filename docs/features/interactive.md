@@ -56,7 +56,7 @@ For the interactive mode, we need to build the `driverInteractive` attribute fir
 Then, we can run the interactive mode:
 
 ```console
-./result/bin/run-nixos-test
+./result/bin/nixos-test-driver
 ```
 
 This drops us into a Python shell (based on [IPython](https://ipython.org/)) where we can interact with the nodes:
