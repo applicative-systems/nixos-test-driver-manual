@@ -35,6 +35,8 @@ Instead of setting `networking.firewall.enable = false;` in every node configura
 
 Everything that is set in `defaults` will be merged into every node's configuration.
 
+If you are running a hybrid test, you can narrow this scope using [`containerDefaults`](https://nixos.org/manual/nixos/stable/#test-opt-containerDefaults) and [`nodeDefaults`](https://nixos.org/manual/nixos/stable/#test-opt-nodeDefaults). Configurations placed in these attributes will ignore the other type entirely, applying only across all containers or all VMs respectively.
+
 ## Imports composition
 
 A test module can import another test module:
