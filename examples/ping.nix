@@ -11,7 +11,7 @@
     networking.dhcpcd.enable = false;
   };
 
-  globalTimeout = 20;
+  globalTimeout = 30;
 
   testScript = ''
     start_all()

@@ -48,7 +48,7 @@
     with subtest("open and close firefox"):
       client.succeed("xterm -e 'firefox about:welcome' >&2 &")
       client.wait_for_window("Firefox")
-      client.sleep(5)
+      client.sleep(20) # new annoying welcome screen with animation
       client.succeed("xdotool key ctrl+q")
       client.wait_for_text(".uit .irefox")
       client.succeed("xdotool key space")
