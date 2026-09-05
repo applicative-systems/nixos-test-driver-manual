@@ -8,9 +8,6 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     mkdocs-flake.url = "github:applicative-systems/mkdocs-flake";
-
-    treefmt-nix.url = "github:numtide/treefmt-nix";
-    treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -29,6 +26,7 @@
       perSystem =
         {
           pkgs,
+          lib,
           config,
           system,
           ...
@@ -44,19 +42,6 @@
               cudaSupport = true;
             };
           };
-
-          treefmtEval = inputs.treefmt-nix.lib.evalModule pkgs {
-            projectRootFile = "flake.nix";
-            programs = {
-              deadnix.enable = true;
-              nixfmt.enable = true;
-              prettier.enable = true;
-              shellcheck.enable = true;
-              shfmt.enable = true;
-              statix.enable = true;
-            };
-            settings.formatter.shellcheck.excludes = [ ".envrc" ];
-          };
         in
         {
           documentation = {
@@ -68,7 +53,65 @@
             strict = true;
           };
 
-          formatter = treefmtEval.config.build.wrapper;
+          formatter = pkgs.treefmt.withConfig {
+            settings = {
+              tree-root-file = "flake.nix";
+              on-unmatched = "info";
+              formatter = {
+                nixfmt = {
+                  command = lib.getExe pkgs.nixfmt;
+                  includes = [ "*.nix" ];
+                };
+                statix = {
+                  command = lib.getExe pkgs.statix;
+                  options = [ "fix" ];
+                  no-positional-arg-support = true;
+                  includes = [ "*.nix" ];
+                };
+                deadnix = {
+                  command = lib.getExe pkgs.deadnix;
+                  options = [ "--edit" ];
+                  includes = [ "*.nix" ];
+                };
+                prettier = {
+                  command = lib.getExe pkgs.prettier;
+                  options = [ "--write" ];
+                  includes = [
+                    "*.css"
+                    "*.html"
+                    "*.js"
+                    "*.json"
+                    "*.md"
+                    "*.yaml"
+                    "*.yml"
+                  ];
+                };
+                shellcheck = {
+                  command = lib.getExe pkgs.shellcheck;
+                  includes = [
+                    "*.sh"
+                    "*.bash"
+                  ];
+                  excludes = [ ".envrc" ];
+                };
+                shfmt = {
+                  command = lib.getExe pkgs.shfmt;
+                  options = [
+                    "-w"
+                    "-i"
+                    "2"
+                    "-s"
+                  ];
+                  includes = [
+                    "*.sh"
+                    "*.bash"
+                    "*.envrc"
+                    "*.envrc.*"
+                  ];
+                };
+              };
+            };
+          };
 
           packages = {
             test-browser = pkgs.testers.runNixOSTest ./examples/browser.nix;
@@ -89,7 +132,7 @@
           };
 
           checks = {
-            formatting = treefmtEval.config.build.check inputs.self;
+            formatting = config.formatter.check inputs.self;
             # not including the cuda tests because they won't
             # run everywhere
             inherit (config.packages)
