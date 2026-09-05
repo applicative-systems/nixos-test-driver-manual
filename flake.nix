@@ -8,6 +8,8 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     mkdocs-flake.url = "github:applicative-systems/mkdocs-flake";
+    mkdocs-flake.inputs.nixpkgs.follows = "nixpkgs";
+    mkdocs-flake.inputs.treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -79,20 +81,13 @@
                   includes = [
                     "*.css"
                     "*.html"
-                    "*.js"
-                    "*.json"
                     "*.md"
-                    "*.yaml"
                     "*.yml"
                   ];
                 };
                 shellcheck = {
                   command = lib.getExe pkgs.shellcheck;
-                  includes = [
-                    "*.sh"
-                    "*.bash"
-                  ];
-                  excludes = [ ".envrc" ];
+                  includes = [ "*.sh" ];
                 };
                 shfmt = {
                   command = lib.getExe pkgs.shfmt;
@@ -104,9 +99,7 @@
                   ];
                   includes = [
                     "*.sh"
-                    "*.bash"
                     "*.envrc"
-                    "*.envrc.*"
                   ];
                 };
               };
