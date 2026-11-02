@@ -1,8 +1,11 @@
 # Screenshots and OCR
 
-!!! warning "This feature is only available in [VMs](./vm.md)"
+!!! note "The examples in this repository contain a test that applies this feature, in VMs and in containers. [Tutorial: Graphical tests and OCR](../tutorials/graphical-vm-tests.md)"
 
-!!! note "The examples in this repository contain a test that applies this feature. [Tutorial: Graphical VMs and OCR](../tutorials/graphical-vm-tests.md)"
+!!! note "Graphical testing with containers"
+
+    The test driver supports graphical desktop in both [VMs](./vm.md) and [containers](./container.md).
+    VMs emulate display hardware, while containers use a headless X11 server instead.
 
 ## Screenshots
 
@@ -11,6 +14,7 @@
 Screenshots can be taken at any time on any VM.
 The content of the screenshot is the content of the QEMU window without its frame.
 As this is the raw video output, it does not matter if the VM configuration has any graphical/desktop settings at all.
+In containers, a graphical desktop must be actually running.
 
 To take a screenshot in the Python `testScript`, call the `screenshot(filename)` method (as [documented in the NixOS manual](https://nixos.org/manual/nixos/stable/#ssec-machine-objects)):
 
@@ -23,7 +27,7 @@ If the screenshot was taken in the [interactive mode](./interactive.md), then it
 
 ## Configuring a graphical desktop
 
-A VM with graphical desktop can be configured with the normal NixOS desktop configuration paths with any desktop manager/environment.
+A VM or container with graphical desktop can be configured with the normal NixOS desktop configuration paths with any desktop manager/environment.
 
 ![Screenshot of ther empty IceWM desktop preset](../assets/test-screenshots/empty-icewm-desktop.png){ width=300 align=right }
 
@@ -74,6 +78,8 @@ The included profile does the following (click on the links to see the implement
 <!-- prettier-ignore-end -->
 
 ## Setting the VM display resolution
+
+!!! note "Not applicable for containers"
 
 If the VM's graphic output is too small/large, it can simply be changed in the NixOS configuration:
 

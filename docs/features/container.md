@@ -21,7 +21,7 @@ These use [Systemd-nspawn](https://www.freedesktop.org/software/systemd/man/late
 -   Disadvantages
 
     - **No custom kernel**: Containers directly run on top of the host kernel.
-    - **No GUI**: Currently not supported.
+    - **X11 only**: Graphical tests on containers are so far only supported with X11, see [Screenshots and OCR](./screenshots-and-ocr.md).
     - **No Setuid**: Software packages that require [Setuid](https://de.wikipedia.org/wiki/Setuid) support are not supported inside the Nix sandbox.
 
 </div>

@@ -4,6 +4,7 @@
 
   enableOCR = true; # (1)
 
+  # (2)
   nodes = {
     server = {
       services.httpd.enable = true;
@@ -13,7 +14,7 @@
       { pkgs, modulesPath, ... }:
       {
         imports = [
-          (modulesPath + "/../tests/common/x11.nix") # (2)
+          (modulesPath + "/../tests/common/x11.nix") # (3)
         ];
 
         programs.firefox.enable = true;
@@ -22,8 +23,8 @@
           pkgs.xdotool
         ];
 
+        # (4)
         virtualisation.resolution = {
-          # (3)
           x = 800;
           y = 600;
         };
