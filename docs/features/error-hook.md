@@ -35,10 +35,10 @@ Please also refer to the [NixOS manual section about the debug hook](https://nix
 }
 ```
 
-??? tip "New improvements regarding the VSOCK interface"
+??? tip "The VSOCK interface"
 
-    The SSH backdoor now uses [`vhost-device-vsock`](https://github.com/rust-vmm/vhost-device/blob/main/vhost-device-vsock/README.md), which talks [AF_VSOCK](https://man7.org/linux/man-pages/man7/vsock.7.html) to the guest but terminates on a UNIX domain socket on the host.
-    No extra `--option sandbox-paths /dev/vhost-vsock` is needed any longer, and untrusted users can debug sandboxed tests with the SSH backdoor.
+    The SSH backdoor uses [`vhost-device-vsock`](https://github.com/rust-vmm/vhost-device/blob/main/vhost-device-vsock/README.md), which talks [AF_VSOCK](https://man7.org/linux/man-pages/man7/vsock.7.html) to the guest but terminates on a UNIX domain socket on the host.
+    No extra sandbox paths are needed, and untrusted users can debug sandboxed tests with the SSH backdoor.
 
 Simply run the test as usual:
 

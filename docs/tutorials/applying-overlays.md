@@ -60,11 +60,7 @@ So far, overlays have been applied to packages _inside the guest_.
 An overlay can also replace the **test driver** itself — the Python program that orchestrates the VMs and containers and runs your `testScript`.
 This is useful when you need to patch driver behaviour for an experimental feature that is not yet upstream.
 
-??? example "This feature has been recently upstreamed"
-
-    Since [PR #503686](https://github.com/NixOS/nixpkgs/pull/503686), the Python test driver is exposed as `pkgs.nixos-test-driver` and wired into tests via the module-system option `config.pythonTestDriverPackage`.
-
-    If `pkgs.nixos-test-driver` doesn't exist in your NixOS version, please upgrade to the latest nixpkgs.
+The Python test driver is exposed as `pkgs.nixos-test-driver` and wired into tests via the module-system option `config.pythonTestDriverPackage`.
 
 The mechanism is a standard Nixpkgs overlay that calls `overrideAttrs` on the `nixos-test-driver` derivation — for example, to add a patch:
 

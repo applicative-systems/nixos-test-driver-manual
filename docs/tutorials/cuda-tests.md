@@ -62,12 +62,6 @@ The common part is in [`cuda/generic.nix`](https://github.com/applicative-system
 
     If this does not crash, we know that CUDA generally works.
 
-??? example "The `requiredFeatures` test attribute has just been upstreamed"
-
-    If the attribute `requiredFeatures.cuda` doesn't exist in your NixOS version, please upgrade to the latest nixpkgs.
-
-    (This change was recently merged with [nixpkgs PR #511413: `nixos-test-driver: Add extra required features`](https://github.com/NixOS/nixpkgs/pull/511413))
-
 The `cuda/generic.nix` test module does not list all necessary paths, yet.
 In the `nvidia.nix` and `amd.nix` test modules, we include `generic.nix` to inherit all generic parts of the test and add the rest of the hardware specific paths:
 
@@ -91,7 +85,7 @@ In the `nvidia.nix` and `amd.nix` test modules, we include `generic.nix` to inhe
         as a required additional feature of the nix builder.
         This way we can avoid running this test on CUDA enabled NVIDIA machines.
 
-??? question "Where to the bind mount paths come from?"
+??? question "Where do the bind mount paths come from?"
 
     After configuring the nix daemon properly (as [described below](#necessary-configuration), we can use the `nix-required-mounts` app to print all paths that are deemed necessary in the Nix sandbox for running CUDA applications inside:
 
@@ -175,12 +169,6 @@ On the host, the GPU driver must be configured properly, as well as the `nix-req
 === "AMD"
 
     Hosts with AMD GPUs need [ZLUDA](https://github.com/vosen/ZLUDA) support and can then run the test out of the box.
-
-    ??? example "These configuration options have just been upstreamed"
-
-        If the attribute `programs.nix-required-mounts.presets.zluda.enable` or `hardware.amdgpu.zluda.enable` don't exist in your NixOS version, please upgrade to the latest nixpkgs.
-
-        (This change was recently merged with [nixpkgs PR: #501095 `programs.nix-required-mounts.presets.zluda.enable: init`](https://github.com/NixOS/nixpkgs/pull/501095))
 
     ```nix title="configuration.nix"
     {

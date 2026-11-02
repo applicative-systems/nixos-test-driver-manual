@@ -3,12 +3,6 @@
 The NixOS test driver emits a lot of output by default: progress lines for every driver action, informational notes, warnings, and error messages.
 During development that is useful, but in CI — or when you just want to see what actually went wrong — the noise can bury the relevant lines.
 
-??? example "This feature has been recently upstreamed"
-
-    Since [PR #509867](https://github.com/NixOS/nixpkgs/pull/509867), the driver supports a configurable log level.
-
-    If the attribute `logLevel` doesn't exist in your NixOS version, please upgrade to the latest nixpkgs.
-
 ## Available Levels
 
 The driver distinguishes three levels.

@@ -155,15 +155,11 @@ Two Nix-daemon settings are required together:
 
 #### Why the `devnet` feature?
 
-??? example "This feature has been recently upstreamed"
-
-    Since [PR #511413](https://github.com/NixOS/nixpkgs/pull/511413), a test that mixes VMs with containers requires the `"devnet"` system feature from its builder by default.
-
-    If the attribute `requiredFeatures.devnet` doesn't exist in your NixOS version, please upgrade to the latest nixpkgs.
+A test that mixes VMs with containers requires the `"devnet"` system feature from its builder by default.
 
 Without this, a misconfigured builder would silently produce a test where VMs and containers cannot see each other on the network — a confusing failure mode that is hard to diagnose.
 
-When the builder does not advertise `devnet`, the test now fails early with an error message like:
+When the builder does not advertise `devnet`, the test fails early with an error message like:
 
 ```console
 error: a 'devnet' feature is required to build '/nix/store/...-vm-test-run-...drv', but the current machine does not provide it
