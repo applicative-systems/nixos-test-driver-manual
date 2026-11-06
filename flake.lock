@@ -71,11 +71,11 @@
         "uv2nix": "uv2nix"
       },
       "locked": {
-        "lastModified": 1793634925,
-        "narHash": "sha256-T4nLJnLjsf3ZX4rmtcJ4+62DuVvnkz+8R6023iud/NQ=",
+        "lastModified": 1793974769,
+        "narHash": "sha256-pLmLtWcUgE+f7mVNiEYqQZ52M9wBWyRsSJzacSQXz/Y=",
         "owner": "applicative-systems",
         "repo": "mkdocs-flake",
-        "rev": "d7666d712e2ca5c55e48dbf712b943216a2e7310",
+        "rev": "ee73c3168a79a185550592c45e85f742a9643dec",
         "type": "github"
       },
       "original": {
@@ -108,11 +108,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1793540411,
-        "narHash": "sha256-fiPJ88izTVucjeo2EQ3jk4aWmLg03I1D4vxnX2QjEgE=",
+        "lastModified": 1793726008,
+        "narHash": "sha256-jQp1wKvbwWdLBASTXkSi/VYmDJ5AbBi1WvcMt9HWJC8=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "0bb2eedc20e4739f29e8045034f2828ad7054f8f",
+        "rev": "1d060086d60cb76a40cf37109f979d88a5bd6396",
         "type": "github"
       },
       "original": {
